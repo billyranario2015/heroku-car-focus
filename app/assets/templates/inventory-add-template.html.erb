@@ -1,0 +1,329 @@
+<div class="col-md-12">
+    <div class="content">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="remove-margin">Inventory Items</h4>
+            </div>
+            <div class="panel-body">
+                <div class="form-info">
+                   <div class="row">
+                       <div class="col-md-12 form-inline">
+                            <div class="row">
+                                <div class="col-md-6">
+                                   <span style="margin-right: 20px;">Select category for items to be added</span>
+                                   <select class="form-control" id="inventory-category" style="margin-top:15px;" ng-model="inventoryData.category_id">
+                                       <option value="0">-- Select Category --</option>
+                                       <option ng-repeat="list in categoryList" value="{{list.category_name}}">{{list.category_name}}</option>
+                                   </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="text-right">
+                                        <h6>Date of Transaction: <span class="text-primary"><%= DateTime.now.strftime('%B %d, %Y') %></span></h6>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                   </div>
+                   <div class="form-categories">
+                       <div class="row">
+                            <!-- form-on-stock -->
+                            <div class="col-md-12 form-wrapper form-on-stock">
+                                <form class="overflow" ng-click="inventorySave()">
+                                    <div class="form-group" style="margin-bottom: 15px;overflow:hidden">
+                                        <div class="col-md-4 remove-padding-left">
+                                            <label>Product Name</label>
+                                            <input type="text" class="form-control" ng-model="inventoryData.product_name">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Quantity</label>
+                                            <input type="number" class="form-control" ng-model="inventoryData.quantity">
+                                        </div>
+                                        <div class="col-md-4 remove-padding-right">
+                                            <label>Price</label>
+                                            <input type="number" class="form-control" ng-model="inventoryData.price">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group overflow">
+                                            <label>Type</label>
+                                            <div class="col-md-12">
+                                                <div class="radio inline-block">
+                                                    <label style="margin-right: 20px;">
+                                                        <input name="category" type="radio" ng-model="inventoryData" ng-init="inventoryData == 'Wholesale'">
+                                                        Wholesale
+                                                    </label>
+                                                </div>
+                                                <div class="radio inline-block">
+                                                    <label>
+                                                        <input name="category" type="radio" ng-model="inventoryData" ng-init="inventoryData == 'Retail'">
+                                                        Retail
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>   
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Product Details</label>
+                                        <textarea class="form-control" rows="5"></textarea>
+                                    </div>
+                                    <div class="remove-padding-left text-right">
+                                        <div class="form-group overflow">
+                                            <button class="btn btn-info">Add Product</button>
+                                        </div>   
+                                    </div>
+                                    <div class="item-list">
+                                        <table class="table table-hover table-condense table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price</th>
+                                                    <th>Type</th>
+                                                    <th>Total</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Spracket</td>
+                                                    <td>3</td>
+                                                    <td>32.00</td>
+                                                    <td>Wholesale</td>
+                                                    <td>96.00</td>
+                                                    <td>
+                                                        <a href="#"><label class="label label-primary"><i class="fa fa-edit"></i> Edit</label></a>
+                                                        <a href="#"><label class="label label-danger"><i class="fa fa-trash"></i> Remove</label></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <hr>
+                                    <div class="form-action overflow">
+                                        <div class="btn-button pull-right">
+                                            <button class="btn btn-success">Save</button>
+                                        </div>
+                                        <div class="btn-button pull-left" style="font-size:24px;">
+                                            <label>Total:</label>
+                                            &nbsp; <span class="text-primary">PHP 1,540</span>
+                                        </div>
+                                    </div>
+                                </form>
+                           </div>
+                           <!-- form-direct-purchase -->
+                           <div class="col-md-12 form-wrapper form-direct-purchase" hidden>
+                               <div class="direct-purchase-fields">
+                                   <div class="form-group">
+                                       <label>O.R Number</label>
+                                       <input type="text" class="form-control" style="width:30%">
+                                   </div>
+                                   <div class="form-group row">
+                                        <div class="col-md-6">
+                                           <label>Personnel in charge</label>
+                                           <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                           <input type="text" class="form-control" placeholder="Cash on hand" style="width:35%;margin-top:25px;">
+                                        </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <label>Store</label>
+                                       <input type="text" class="form-control" style="width:30%;">
+                                   </div>
+                                   <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <label>Product</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Quantity</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Price</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                   </div>
+                                   <div class="btn-add-new text-right margin-btm-md">
+                                       <button class="btn btn-info">Add New Purchase</button>
+                                   </div>
+                                   <div class="item-list">
+                                        <table class="table table-hover table-condense table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Manufacturer</th>
+                                                    <th>Price</th>
+                                                    <th>Type</th>
+                                                    <th>Total</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Spracket</td>
+                                                    <td>3</td>
+                                                    <td>Kabee</td>
+                                                    <td>32.00</td>
+                                                    <td>Wholesale</td>
+                                                    <td>96.00</td>
+                                                    <td>
+                                                        <a href="#"><label class="label label-primary"><i class="fa fa-edit"></i> Edit</label></a>
+                                                        <a href="#"><label class="label label-danger"><i class="fa fa-trash"></i> Remove</label></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <hr>
+                                    <div class="form-action overflow">
+                                        <div class="btn-button pull-right">
+                                            <button class="btn btn-success">Save</button>
+                                        </div>
+                                        <div class="btn-button pull-left" style="font-size:24px;">
+                                            <label>Total:</label>
+                                            &nbsp; <span class="text-primary">PHP 1,540</span>
+                                        </div>
+                                    </div>
+                               </div>
+                           </div>
+                           <!-- form-product-order -->
+                           <div class="col-md-12 form-wrapper form-product-order" hidden>
+                                <div class="product-order-fields">
+                                    <div class="form-group">
+                                        <label>Manufacturer:</label>
+                                        <input type="text" class="form-control" style="width:40%;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Address:</label>
+                                        <textarea class="form-control" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-info manufacturer">
+                                    <form class="overflow">
+                                        <div class="form-group" style="margin-bottom: 15px;overflow:hidden">
+                                            <div class="col-md-4 remove-padding-left">
+                                                <label>Product</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Quantity</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Price</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+
+                                       <div class="col-md-12">
+                                            <div class="form-group overflow">
+                                                <label>Type</label>
+                                                <div class="col-md-12">
+                                                    <div class="radio inline-block">
+                                                        <label style="margin-right: 20px;">
+                                                            <input name="category" type="radio" value="">
+                                                            Wholesale
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline-block">
+                                                        <label>
+                                                            <input name="category" type="radio" value="">
+                                                            Retail
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>   
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Product Details</label>
+                                            <textarea class="form-control" rows="5"></textarea>
+                                        </div>
+                                        <div class="remove-padding-left text-right">
+                                            <div class="form-group overflow">
+                                                <button class="btn btn-info">Add Product</button>
+                                            </div>   
+                                        </div>
+                                        <div class="item-list">
+                                            <table class="table table-hover table-condense table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product Name</th>
+                                                        <th>Quantity</th>
+                                                        <th>Manufacturer</th>
+                                                        <th>Price</th>
+                                                        <th>Type</th>
+                                                        <th>Total</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Spracket</td>
+                                                        <td>3</td>
+                                                        <td>Kabee</td>
+                                                        <td>32.00</td>
+                                                        <td>Wholesale</td>
+                                                        <td>96.00</td>
+                                                        <td>
+                                                            <a href="#"><label class="label label-primary"><i class="fa fa-edit"></i> Edit</label></a>
+                                                            <a href="#"><label class="label label-danger"><i class="fa fa-trash"></i> Remove</label></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>
+                                        <div class="form-action overflow">
+                                            <div class="btn-button pull-right">
+                                                <button class="btn btn-success">Save</button>
+                                            </div>
+                                            <div class="btn-button pull-left" style="font-size:24px;">
+                                                <label>Total:</label>
+                                                &nbsp; <span class="text-primary">PHP 1,540</span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+    $( document ).ready( function( ) {
+        $( "#inventory-category" ).change(function () {
+            var status = "";
+            
+            $( "select option:selected" ).each(function() {
+              status = $( this ).val();
+              console.log(status);
+
+            });
+            
+            if ( status === "On Stock" ) {
+                $( '.form-wrapper' ).css( 'display','none' );
+                $( '.form-' + status ).show();
+            } else if( status === 'direct-purchase' ){
+                $( '.form-wrapper' ).css( 'display','none' );
+                $( '.form-' + status ).show();
+            } else if( status === 'product-order' ){
+                $( '.form-wrapper' ).css( 'display','none' );
+                $( '.form-' + status ).show();
+            } else{
+                $( '.form-wrapper' ).css( 'display','none' );
+            };          
+
+        }).change();
+
+
+    } );
+</script>

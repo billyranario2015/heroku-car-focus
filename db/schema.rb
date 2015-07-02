@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702054147) do
+ActiveRecord::Schema.define(version: 20150702171118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(version: 20150702054147) do
 
   add_index "banks", ["user_id"], name: "index_banks_on_user_id", using: :btree
 
+  create_table "categories", force: :cascade do |t|
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "category_name"
+  end
+
   create_table "customer_infos", force: :cascade do |t|
     t.string   "fullname"
     t.string   "contact_no"
@@ -35,16 +41,16 @@ ActiveRecord::Schema.define(version: 20150702054147) do
   end
 
   create_table "direct_purchases", force: :cascade do |t|
-    t.integer  "group_id"
+    t.integer  "category_id"
     t.string   "or_no"
     t.string   "in_charge"
-    t.string   "cash_on_hand"
-    t.string   "product_name"
+    t.integer  "cash_on_hand"
+    t.integer  "product_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
-  add_index "direct_purchases", ["group_id"], name: "index_direct_purchases_on_group_id", using: :btree
+  add_index "direct_purchases", ["category_id"], name: "index_direct_purchases_on_category_id", using: :btree
 
   create_table "estimations", force: :cascade do |t|
     t.integer  "user_id"
@@ -100,13 +106,11 @@ ActiveRecord::Schema.define(version: 20150702054147) do
     t.integer  "quantity"
     t.integer  "price"
     t.text     "product_details"
-    t.integer  "group_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
 
   add_index "inventories", ["category_id"], name: "index_inventories_on_category_id", using: :btree
-  add_index "inventories", ["group_id"], name: "index_inventories_on_group_id", using: :btree
   add_index "inventories", ["user_id"], name: "index_inventories_on_user_id", using: :btree
 
   create_table "logs", force: :cascade do |t|
@@ -127,17 +131,17 @@ ActiveRecord::Schema.define(version: 20150702054147) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "onstocks", force: :cascade do |t|
-    t.integer  "group_id"
+  create_table "on_stocks", force: :cascade do |t|
+    t.integer  "category_id"
     t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "onstocks", ["group_id"], name: "index_onstocks_on_group_id", using: :btree
+  add_index "on_stocks", ["category_id"], name: "index_on_stocks_on_category_id", using: :btree
 
   create_table "product_orders", force: :cascade do |t|
-    t.integer  "group_id"
+    t.integer  "category_id"
     t.integer  "manufacturer_id"
     t.string   "type"
     t.string   "car_brand"
@@ -145,7 +149,7 @@ ActiveRecord::Schema.define(version: 20150702054147) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "product_orders", ["group_id"], name: "index_product_orders_on_group_id", using: :btree
+  add_index "product_orders", ["category_id"], name: "index_product_orders_on_category_id", using: :btree
   add_index "product_orders", ["manufacturer_id"], name: "index_product_orders_on_manufacturer_id", using: :btree
 
   create_table "services", force: :cascade do |t|
@@ -160,8 +164,12 @@ ActiveRecord::Schema.define(version: 20150702054147) do
     t.string   "lastname"
     t.string   "address"
     t.string   "contact"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "user_infos", ["user_id"], name: "index_user_infos_on_user_id", using: :btree

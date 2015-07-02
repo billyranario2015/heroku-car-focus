@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  group_id: 1
+  category_id: 1
   or_no: MyString
   in_charge: MyString
-  cash_on_hand: MyString
-  product_name: MyString
+  cash_on_hand: 1
+  product_name: 1
 
 two:
-  group_id: 1
+  category_id: 1
   or_no: MyString
   in_charge: MyString
-  cash_on_hand: MyString
-  product_name: MyString
+  cash_on_hand: 1
+  product_name: 1

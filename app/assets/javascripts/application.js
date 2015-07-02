@@ -12,5 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//= require bootstrap.min
+//= require metisMenu
+//= require jquery.dataTables.min
+//= require dataTables.bootstrap.min
+//= require sb-admin-2
+//= require scripts/angular
+//= require angular-rails-templates
+//= require scripts/app
+//= require scripts/factory
+//= require scripts/directive
+//= require scripts/controller
+//= require_tree ../templates

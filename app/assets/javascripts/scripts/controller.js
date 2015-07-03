@@ -26,23 +26,77 @@ app
       console.log("inventoryAddCtrl");
       $scope.categoryList = {};
       $scope.inventoryData = {};
+      $scope.inventoryList = {};
+      $scope.total = {};
+      $scope.list = '';
       // Get list of services
       $scope.categories = function categories(){
         CarServer.request("get", "/categories",
         function(response){
           $scope.categoryList = response;
           console.log($scope.categoryList);
+
         });
       }
       
-      $scope.inventorySave = function inventorySave(){
-        CarServer.request("post", '/inventories',
+      $scope.submitStock = function submitStock(){
+        console.log($scope.inventoryData);
+        CarServer.request("post", '/inventories/submitStock',
           function(response){
             console.log(response);
+            $scope.getInventories();
           }, $scope.inventoryData);
+
+        $scope.inventoryData = "";
       }
       // add inventory data
 
+
+      // $scope.typeCategory();
+      $scope.typeCategory = function typeCategory(list){
+        console.log(list);
+        if ( list.category_name == "On Stock" ) {
+                $( '.form-wrapper' ).css( 'display','none' );
+                $( '.form-on-stock' ).show();
+            } else if( list.category_name == 'Direct Purchase' ){
+                $( '.form-wrapper' ).css( 'display','none' );
+                $( '.form-direct-purchase' ).show();
+            } else if( list.category_name == 'Product Order' ){
+                $( '.form-wrapper' ).css( 'display','none' );
+                $( '.form-product-order' ).show();
+            }      
+      }
+
+      // get inventories
+      $scope.getInventories = function getInventories(){
+        var forTotal =  {}
+        CarServer.request("get", '/inventories/getInventories',
+          function(response){
+            $scope.inventoryList = response;
+          });
+      }
+      // get total
+      $scope.getTotal = function getTotal(){
+        var total = 0;
+        var total = 0;
+        for(var i = 0; i < $scope.inventoryList.length; i++){
+            var product = $scope.inventoryList[i];
+            total += (product.price * product.quantity);
+        }
+        return total;
+      }
+      // get stocks
+      $scope.getInventoryStocks = function getInventoryStocks(){
+        CarServer.request("get",'/inventories/getInventoryStocks',
+          function(response){
+            console.log(response)
+          });
+      }
+
+
+      // load functions
+      $scope.getInventoryStocks();
+      $scope.getInventories();
       $scope.categories();
     }
   ])

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702171118) do
+ActiveRecord::Schema.define(version: 20150703090646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,9 +48,11 @@ ActiveRecord::Schema.define(version: 20150702171118) do
     t.integer  "product_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "inventory_id"
   end
 
   add_index "direct_purchases", ["category_id"], name: "index_direct_purchases_on_category_id", using: :btree
+  add_index "direct_purchases", ["inventory_id"], name: "index_direct_purchases_on_inventory_id", using: :btree
 
   create_table "estimations", force: :cascade do |t|
     t.integer  "user_id"
@@ -108,10 +110,21 @@ ActiveRecord::Schema.define(version: 20150702171118) do
     t.text     "product_details"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "product_type"
   end
 
   add_index "inventories", ["category_id"], name: "index_inventories_on_category_id", using: :btree
   add_index "inventories", ["user_id"], name: "index_inventories_on_user_id", using: :btree
+
+  create_table "inventory_stocks", force: :cascade do |t|
+    t.integer  "inventory_id"
+    t.integer  "on_stock_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "inventory_stocks", ["inventory_id"], name: "index_inventory_stocks_on_inventory_id", using: :btree
+  add_index "inventory_stocks", ["on_stock_id"], name: "index_inventory_stocks_on_on_stock_id", using: :btree
 
   create_table "logs", force: :cascade do |t|
     t.integer  "user_id"
@@ -133,12 +146,14 @@ ActiveRecord::Schema.define(version: 20150702171118) do
 
   create_table "on_stocks", force: :cascade do |t|
     t.integer  "category_id"
-    t.string   "type"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "product_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "inventory_id"
   end
 
   add_index "on_stocks", ["category_id"], name: "index_on_stocks_on_category_id", using: :btree
+  add_index "on_stocks", ["inventory_id"], name: "index_on_stocks_on_inventory_id", using: :btree
 
   create_table "product_orders", force: :cascade do |t|
     t.integer  "category_id"
@@ -147,9 +162,11 @@ ActiveRecord::Schema.define(version: 20150702171118) do
     t.string   "car_brand"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "inventory_id"
   end
 
   add_index "product_orders", ["category_id"], name: "index_product_orders_on_category_id", using: :btree
+  add_index "product_orders", ["inventory_id"], name: "index_product_orders_on_inventory_id", using: :btree
   add_index "product_orders", ["manufacturer_id"], name: "index_product_orders_on_manufacturer_id", using: :btree
 
   create_table "services", force: :cascade do |t|

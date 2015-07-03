@@ -13,6 +13,10 @@ Rails.application.routes.draw do
       root 'user#index', as: :authenticated_root
       get '*path' => 'application#index'
       get '/user/settings' => 'user#settings', as: 'user_settings'
+      post '/inventories/submitStock' => 'inventories#submitStock'
+
+      get '/inventories/getInventories' => 'inventories#getInventories'
+      get '/inventories/getStocks' => 'inventories#getInventoryStocks'
       # get '/inventories/getServices' => 'inventories#getServices'
     end
 

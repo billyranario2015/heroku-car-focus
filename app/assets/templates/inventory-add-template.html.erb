@@ -11,9 +11,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                    <span style="margin-right: 20px;">Select category for items to be added</span>
-                                   <select class="form-control" id="inventory-category" style="margin-top:15px;" ng-model="inventoryData.category_id">
-                                       <option value="0">-- Select Category --</option>
-                                       <option ng-repeat="list in categoryList" value="{{list.category_name}}">{{list.category_name}}</option>
+                                   <select class="form-control" id="inventory-category" style="margin-top:15px;" ng-options="list.category_name for list in categoryList" ng-model="category_name" ng-click="typeCategory(category_name)">
                                    </select>
                                 </div>
 
@@ -29,19 +27,22 @@
                        <div class="row">
                             <!-- form-on-stock -->
                             <div class="col-md-12 form-wrapper form-on-stock">
-                                <form class="overflow" ng-click="inventorySave()">
+                                <form class="overflow" ng-submit="submitStock()">
                                     <div class="form-group" style="margin-bottom: 15px;overflow:hidden">
                                         <div class="col-md-4 remove-padding-left">
+                                            <input type="hidden" ng-model="inventoryData.category_id" ng-init="inventoryData.category_id = 1">
+                                            <input type="hidden" ng-model="inventoryData.transaction_date" ng-init="inventoryData.transaction_date = '<%= Date.today.to_s %>'">
+                                            
                                             <label>Product Name</label>
-                                            <input type="text" class="form-control" ng-model="inventoryData.product_name">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label>Quantity</label>
-                                            <input type="number" class="form-control" ng-model="inventoryData.quantity">
+                                            <input type="text" class="form-control" ng-model="inventoryData.product_name" required>
                                         </div>
                                         <div class="col-md-4 remove-padding-right">
                                             <label>Price</label>
-                                            <input type="number" class="form-control" ng-model="inventoryData.price">
+                                            <input type="number" class="form-control" ng-model="inventoryData.price" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Quantity</label>
+                                            <input type="number" class="form-control" ng-model="inventoryData.quantity" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -50,13 +51,13 @@
                                             <div class="col-md-12">
                                                 <div class="radio inline-block">
                                                     <label style="margin-right: 20px;">
-                                                        <input name="category" type="radio" ng-model="inventoryData" ng-init="inventoryData == 'Wholesale'">
+                                                        <input name="category" type="radio" value="WholeSale" ng-model="inventoryData.product_type" required>
                                                         Wholesale
                                                     </label>
                                                 </div>
                                                 <div class="radio inline-block">
                                                     <label>
-                                                        <input name="category" type="radio" ng-model="inventoryData" ng-init="inventoryData == 'Retail'">
+                                                        <input name="category" type="radio" value="Retail" ng-model="inventoryData.product_type" required>
                                                         Retail
                                                     </label>
                                                 </div>
@@ -65,11 +66,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Product Details</label>
-                                        <textarea class="form-control" rows="5"></textarea>
+                                        <textarea class="form-control" rows="5" ng-model="inventoryData.product_details" required></textarea>
                                     </div>
                                     <div class="remove-padding-left text-right">
                                         <div class="form-group overflow">
-                                            <button class="btn btn-info">Add Product</button>
+                                            <button class="btn btn-info" type="submit">Add Product</button>
                                         </div>   
                                     </div>
                                     <div class="item-list">
@@ -85,12 +86,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Spracket</td>
-                                                    <td>3</td>
-                                                    <td>32.00</td>
-                                                    <td>Wholesale</td>
-                                                    <td>96.00</td>
+                                                <tr ng-repeat="list in inventoryList">
+                                                    <td>{{list.product_name}}</td>
+                                                    <td>{{list.quantity}}</td>
+                                                    <td>{{list.price}}</td>
+                                                    <td>{{list.product_type}}</td>
+                                                    <td>{{list.price * list.quantity}}</td>
                                                     <td>
                                                         <a href="#"><label class="label label-primary"><i class="fa fa-edit"></i> Edit</label></a>
                                                         <a href="#"><label class="label label-danger"><i class="fa fa-trash"></i> Remove</label></a>
@@ -106,7 +107,7 @@
                                         </div>
                                         <div class="btn-button pull-left" style="font-size:24px;">
                                             <label>Total:</label>
-                                            &nbsp; <span class="text-primary">PHP 1,540</span>
+                                            &nbsp; <span class="text-primary">PHP {{ getTotal() }}</span>
                                         </div>
                                     </div>
                                 </form>
@@ -298,32 +299,3 @@
 </div>
 </div>
 
-<script type="text/javascript">
-    $( document ).ready( function( ) {
-        $( "#inventory-category" ).change(function () {
-            var status = "";
-            
-            $( "select option:selected" ).each(function() {
-              status = $( this ).val();
-              console.log(status);
-
-            });
-            
-            if ( status === "On Stock" ) {
-                $( '.form-wrapper' ).css( 'display','none' );
-                $( '.form-' + status ).show();
-            } else if( status === 'direct-purchase' ){
-                $( '.form-wrapper' ).css( 'display','none' );
-                $( '.form-' + status ).show();
-            } else if( status === 'product-order' ){
-                $( '.form-wrapper' ).css( 'display','none' );
-                $( '.form-' + status ).show();
-            } else{
-                $( '.form-wrapper' ).css( 'display','none' );
-            };          
-
-        }).change();
-
-
-    } );
-</script>

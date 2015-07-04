@@ -81,6 +81,9 @@ app
           var priceValue = parseFloat( qtyPrice );
           getTotal( priceValue , '-' );
           $( '#' + orderID ).parent().fadeOut();
+          console.log( 'test' );
+          console.log( orderID );
+          console.log( qtyPrice );
        }
 
 

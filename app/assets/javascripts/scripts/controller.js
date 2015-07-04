@@ -52,7 +52,7 @@ app
       // add inventory data
 
 
-      // $scope.typeCategory();
+      $scope.typeCategory();
       $scope.typeCategory = function typeCategory(list){
         console.log(list);
         if ( list.category_name == "On Stock" ) {

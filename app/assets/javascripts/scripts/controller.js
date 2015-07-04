@@ -75,26 +75,7 @@ app
           $( '.form-on-stock' ).show();
         };
       }
-
-
-      // $scope.typeCategory = function typeCategory(){        
-      //   $( '.form-wrapper' ).css( 'display','none' );
-      //   $( '.form-on-stock' ).show();
-        // if ( list.category_name == "On Stock" ) {
-        //         $( '.form-wrapper' ).css( 'display','none' );
-        //         $( '.form-on-stock' ).show();
-        // } else if( list.category_name == 'Direct Purchase' ){
-        //     $( '.form-wrapper' ).css( 'display','none' );
-        //     $( '.form-direct-purchase' ).show();
-        // } else if( list.category_name == 'Product Order' ){
-        //     $( '.form-wrapper' ).css( 'display','none' );
-        //     // $( '.form-product-order' ).show();
-        // }else{
-        //   $( '.form-on-stock' ).show();
-        // }
-      // }
-      
-      // $scope.typeCategory();
+      $scope.showCategoryForm(false);
 
       // get inventories
       $scope.getInventories = function getInventories(){

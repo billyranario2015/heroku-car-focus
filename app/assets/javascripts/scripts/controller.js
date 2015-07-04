@@ -76,7 +76,15 @@ app
         $( '#basket-ordered-lists' ).append( htmlList );
         $scope.inventoryData = "";
 
-        $scope.addOnStock.push($scope.inventoryData);
+        $scope.addOnStock.push({ 
+          'category_id' : $scope.inventoryData.category_id ,  
+          'transaction_date' : $scope.inventoryData.transaction_date ,
+          'price' : $scope.inventoryData.price ,
+          'product_name' : $scope.inventoryData.product_name ,
+          'product_details' : $scope.inventoryData.product_details ,
+          'product_type ' : $scope.inventoryData.product_type   ,
+          'quantity' : $scope.inventoryData.quantity ,
+        });
         console.log( 'open' );
         console.log($scope.addOnStock);
         console.log( 'close' );

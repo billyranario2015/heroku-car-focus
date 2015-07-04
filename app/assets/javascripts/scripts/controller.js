@@ -28,7 +28,11 @@ app
       $scope.inventoryData = {};
       $scope.inventoryList = {};
       $scope.total = {};
-      $scope.list = {};
+      $scope.lists = [ 
+          { 'value' : 'on-stock' , 'category' : 'On Stock'  }, 
+          { 'value' : 'direct-purchase' , 'category' : 'Direct Purchase'  }, 
+          { 'value' : 'product-order' , 'category' : 'Product Order'  }
+      ];
       // Get list of services
       $scope.categories = function categories(){
         CarServer.request("get", "/categories",
@@ -51,10 +55,14 @@ app
       }
       // add inventory data
 
-      
-      $scope.typeCategory = function typeCategory(){        
-        $( '.form-wrapper' ).css( 'display','none' );
-        $( '.form-on-stock' ).show();
+      $scope.showCategoryForm = function typeCategory( categoryType ) {
+        alert(categoryType);
+      }
+
+
+      // $scope.typeCategory = function typeCategory(){        
+      //   $( '.form-wrapper' ).css( 'display','none' );
+      //   $( '.form-on-stock' ).show();
         // if ( list.category_name == "On Stock" ) {
         //         $( '.form-wrapper' ).css( 'display','none' );
         //         $( '.form-on-stock' ).show();
@@ -67,9 +75,9 @@ app
         // }else{
         //   $( '.form-on-stock' ).show();
         // }
-      }
+      // }
       
-      $scope.typeCategory();
+      // $scope.typeCategory();
 
       // get inventories
       $scope.getInventories = function getInventories(){

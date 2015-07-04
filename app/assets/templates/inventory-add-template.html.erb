@@ -30,18 +30,18 @@
                                 <div class="col-md-7">
                                     <form class="overflow" ng-submit="submitStock()">
                                     <div class="form-group" style="margin-bottom: 15px;overflow:hidden">
-                                        <div class="col-md-4 remove-padding-left">
+                                        <div class="col-md-12">
                                             <input type="hidden" ng-model="inventoryData.category_id" ng-init="inventoryData.category_id = 1">
                                             <input type="hidden" ng-model="inventoryData.transaction_date" ng-init="inventoryData.transaction_date = '<%= Date.today.to_s %>'">
                                             
                                             <label>Product Name</label>
                                             <input type="text" class="form-control" ng-model="inventoryData.product_name" required>
                                         </div>
-                                        <div class="col-md-4 remove-padding-right">
+                                        <div class="col-md-12">
                                             <label>Price</label>
                                             <input type="number" class="form-control" ng-model="inventoryData.price" required>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
                                             <label>Quantity</label>
                                             <input type="number" class="form-control" ng-model="inventoryData.quantity" required>
                                         </div>

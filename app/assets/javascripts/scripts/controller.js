@@ -63,7 +63,8 @@ app
       // }
 
        $scope.addToBasketStock = function addToBasketStock(){
-        console.log($scope.inventoryData);
+        // console.log($scope.inventoryData);
+        var today = new Date();
         var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
         var htmlList = '<li>'
@@ -77,14 +78,14 @@ app
 
         $scope.addOnStock.push({ 
           'category_id' : $scope.inventoryData.category_id ,  
-          'transaction_date' : Date.now() ,
+          'transaction_date' : today.toISOString().substring(0, 10) ,
           'price' : $scope.inventoryData.price ,
           'product_name' : $scope.inventoryData.product_name ,
           'product_details' : $scope.inventoryData.product_details ,
           'product_type ' : $scope.inventoryData.product_type   ,
           'quantity' : $scope.inventoryData.quantity ,
         });
-        
+
         console.log( 'open' );
         console.log($scope.addOnStock);
         console.log( 'close' );

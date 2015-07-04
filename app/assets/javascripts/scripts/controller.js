@@ -47,16 +47,24 @@ app
         });
       }
       
-      $scope.submitStock = function submitStock(){
-        console.log($scope.inventoryData);
-        CarServer.request("post", '/inventories/submitStock',
-          function(response){
-            console.log(response);
-            $scope.getInventories();
-          }, $scope.inventoryData);
+      // $scope.submitStock = function submitStock(){
+      //   console.log($scope.inventoryData);
+      //   CarServer.request("post", '/inventories/submitStock',
+      //     function(response){
+      //       console.log(response);
+      //       $scope.getInventories();
+      //     }, $scope.inventoryData);
 
-        $scope.inventoryData = "";
-      }
+      //   $scope.inventoryData = "";
+      // }
+       $scope.submitStock = function submitStock(){
+        var htmlList = '<li>'
+                     + '<button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
+                     + '<label><a href="#" data-toggle="modal" data-target="#modal-edit-selection">'+ $scope.inventoryData.product_name +'</a></label>'
+                     + '<span class="price pull-right">Php <span class="price-value">200.00</span></span>'
+                     + '</li>';
+        $( '#basket-ordered-lists' ).append( htmlList );
+       }
       // add inventory data
 
       $scope.showCategoryForm = function showCategoryForm( categoryType ) {

@@ -28,11 +28,17 @@ app
       $scope.inventoryData = {};
       $scope.inventoryList = {};
       $scope.total = {};
+      // $scope.lists = [ 
+      //     { 'value' : 'on-stock' , 'category' : 'On Stock'  }, 
+      //     { 'value' : 'direct-purchase' , 'category' : 'Direct Purchase'  }, 
+      //     { 'value' : 'product-order' , 'category' : 'Product Order'  }
+      // ];
       $scope.lists = [ 
-          { 'value' : 'on-stock' , 'category' : 'On Stock'  }, 
-          { 'value' : 'direct-purchase' , 'category' : 'Direct Purchase'  }, 
-          { 'value' : 'product-order' , 'category' : 'Product Order'  }
+          'On Stock', 
+          'Direct Purchase', 
+          'Product Order'
       ];
+
       // Get list of services
       $scope.categories = function categories(){
         CarServer.request("get", "/categories",

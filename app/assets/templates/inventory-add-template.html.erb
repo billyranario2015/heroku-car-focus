@@ -20,6 +20,15 @@
                                                 <option ng-repeat="list in lists" ng-click="showCategoryForm(list.value)">{{ list.category }}</option>
                                             </select>
 
+                                            <select 
+                                                class="form-control" 
+                                                id="inventory-category" 
+                                                style="margin-top:15px;"
+                                                ng-model="selectedCategory"
+                                                ng-options="list in list for lists" 
+                                            >
+                                            </select>
+
                                         </div>
 
                                         <div class="col-md-6">

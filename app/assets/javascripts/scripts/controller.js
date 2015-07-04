@@ -52,7 +52,7 @@ app
       // add inventory data
 
 
-      $scope.typeCategory();
+      $scope.typeCategory('default');
       $scope.typeCategory = function typeCategory(list){
         console.log(list);
         if ( list.category_name == "On Stock" ) {
@@ -67,7 +67,7 @@ app
             }else{
               $( '.form-on-stock' ).show();
             }
-      }
+        }
 
       // get inventories
       $scope.getInventories = function getInventories(){

@@ -58,7 +58,16 @@ app
       // add inventory data
 
       $scope.showCategoryForm = function showCategoryForm( categoryType ) {
-        alert(categoryType);
+        console.log(categoryType);
+        if (categoryType.value == 'on-stock') {
+          console.log(categoryType.value);
+        } else if(categoryType.value == 'direct-purchase') {
+          console.log(categoryType.value);
+        } else if(categoryType.value == 'product-order') {
+          console.log(categoryType.value);
+        } else {
+          console.log( 'false' );
+        };
       }
 
 

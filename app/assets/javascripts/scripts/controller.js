@@ -61,10 +61,10 @@ app
 
        $scope.addToBasketStock = function addToBasketStock(){
         console.log($scope.inventoryData);
-        var listCount = 1;
+        var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
         var htmlList = '<li>'
-                     + '<button value="'+ listCount++ +'" class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
+                     + '<button value="'+ randomID +'" class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
                      + '<label><a href="#" data-toggle="modal" data-target="#modal-edit-selection">'+ $scope.inventoryData.product_name +'</a></label>'
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';

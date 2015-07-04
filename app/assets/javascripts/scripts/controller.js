@@ -60,18 +60,18 @@ app
       // }
 
        $scope.addToBasketStock = function addToBasketStock(){
-        var getPriceValue = parseFloat( $scope.inventoryData.price );
+        var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
         var htmlList = '<li>'
                      + '<button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
                      + '<label><a href="#" data-toggle="modal" data-target="#modal-edit-selection">'+ $scope.inventoryData.product_name +'</a></label>'
-                     + '<span class="price pull-right">Php <span class="price-value">' + $scope.inventoryData.price + '</span></span>'
+                     + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
         $( '.total-wrapper' ).show();
         $( '.save-button' ).show();
         $( '#basket-ordered-lists' ).append( htmlList );
         $scope.inventoryData = "";
 
-        getTotal( getPriceValue , '+' );
+        getTotal( totalQuantityPrice , '+' );
        }
 
        function getTotal( orderValue , operation ) {

@@ -28,7 +28,7 @@ app
       $scope.inventoryData = {};
       $scope.inventoryList = {};
       $scope.total = {};
-      $scope.list = '';
+      $scope.list = {};
       // Get list of services
       $scope.categories = function categories(){
         CarServer.request("get", "/categories",

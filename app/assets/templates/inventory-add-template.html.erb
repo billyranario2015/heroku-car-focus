@@ -39,7 +39,7 @@
                                     <!-- form-on-stock -->
                                     <div class="col-md-12 form-wrapper form-on-stock">
                                         <div class="col-md-12 remove-side-padding">
-                                             <form class="overflow" ng-submit="submitStock()">
+                                             <form class="overflow" ng-submit="addToBasketStock()">
                                                 <div class="form-group" style="margin-bottom: 15px;overflow:hidden">
                                                     <div class="col-md-12">
                                                         <input type="hidden" ng-model="inventoryData.category_id" ng-init="inventoryData.category_id = 1">
@@ -280,10 +280,10 @@
                        <ul class="list-unstyled lists" id="basket-ordered-lists">
                         </ul>
                    </div>
-                   <div class="total-wrapper">
-                       <h3>Total: <span class="pull-right">Php 200.00</span></span></h3>     
+                   <div class="total-wrapper" hidden>
+                       <h3>Total: <span class="pull-right">Php </span><span id="totalBasketPrice">200.00</span></h3>     
                    </div>
-                   <div class="save-button">
+                   <div class="save-button" hidden>
                        <button class="btn btn-success float"><i class="fa fa-shopping-cart"></i> Save Procuct</button>
                    </div>
                </div>

@@ -36,6 +36,7 @@ app
           { 'value' : 'product-order' , 'category' : 'Product Order'  }
       ];
       $scope.category.list = $scope.lists[0];
+      var totalAmount = 0;
       
       // Get list of services
       $scope.categories = function categories(){
@@ -57,14 +58,33 @@ app
 
       //   $scope.inventoryData = "";
       // }
-       $scope.submitStock = function submitStock(){
+
+       $scope.addToBasketStock = function addToBasketStock(){
+        var getPriceValue = parseFloat( $scope.inventoryData.price );
         var htmlList = '<li>'
                      + '<button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
                      + '<label><a href="#" data-toggle="modal" data-target="#modal-edit-selection">'+ $scope.inventoryData.product_name +'</a></label>'
-                     + '<span class="price pull-right">Php <span class="price-value">200.00</span></span>'
+                     + '<span class="price pull-right">Php <span class="price-value">' + $scope.inventoryData.price + '</span></span>'
                      + '</li>';
+        $( '.total-wrapper' ).show();
+        $( '.save-button' ).show();
         $( '#basket-ordered-lists' ).append( htmlList );
+        $scope.inventoryData = "";
+
+        getTotal( getPriceValue , '+' );
        }
+
+       function getTotal( orderValue , operation ) {
+        var total = 0;
+        if ( operation == '+' ) {
+          total = totalAmount + orderValue;
+        } else if( operation == '-' ) {
+          total = totalAmount - orderValue;
+        }
+        totalAmount = total;
+        $( '#totalBasketPrice' ).text( total.toFixed(2) );
+      }
+
       // add inventory data
 
       $scope.showCategoryForm = function showCategoryForm( categoryType ) {

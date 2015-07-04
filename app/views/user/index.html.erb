@@ -27,7 +27,7 @@
 
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    Welcome, <%= current_user.user_type.titleize %>
+                    Welcome, <%= current_user.user_type %>
                     <span class="text-primary"></span>
                 </li>
                 <li class="dropdown">
@@ -59,7 +59,7 @@
                                    <%= image_tag "user.jpg", class: "img-circle float" %>
                                </div>
                                <div class="profile-name text-center">
-                                   <h4>Hello, <span class="text-primary"><%= current_user.user_info.firstname.titleize %></span></h4>
+                                   <h4>Hello, <span class="text-primary"><%= current_user.user_info.firstname %></span></h4>
                                </div>
                            </div>
                         </li>

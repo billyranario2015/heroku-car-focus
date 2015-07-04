@@ -28,6 +28,7 @@ app
       $scope.category = {};
       $scope.inventoryData = {};
       $scope.inventoryList = {};
+      $scope.categoryShow = 'on-stock';
       $scope.total = {};
       $scope.lists = [ 
           { 'value' : 'on-stock' , 'category' : 'On Stock'  }, 
@@ -59,15 +60,15 @@ app
       // add inventory data
 
       $scope.showCategoryForm = function showCategoryForm( categoryType ) {
-        console.log(categoryType);
+        
         if (categoryType.value == 'on-stock') {
-          console.log(categoryType.value);
+          $scope.categoryShow = categoryType.value;
         } else if(categoryType.value == 'direct-purchase') {
-          console.log(categoryType.value);
+          $scope.categoryShow = categoryType.value;
         } else if(categoryType.value == 'product-order') {
-          console.log(categoryType.value);
+          $scope.categoryShow = categoryType.value;
         } else {
-          console.log( 'false' );
+          $scope.categoryShow = 'on-stock';
         };
       }
 

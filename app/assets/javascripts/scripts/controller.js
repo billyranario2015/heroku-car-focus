@@ -87,9 +87,7 @@ app
           'quantity' : $scope.inventoryData.quantity ,
         });
 
-        console.log( 'open' );
         console.log($scope.addOnStock);
-        console.log( 'close' );
 
         $scope.inventoryData = "";
         getTotal( totalQuantityPrice , '+' );
@@ -108,6 +106,8 @@ app
                   return false;
               }
           });
+          
+          console.log($scope.addOnStock);
 
           $( '#' + ID ).parent().remove();
        } );

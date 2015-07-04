@@ -25,6 +25,7 @@ app
     {
       console.log("inventoryAddCtrl");
       $scope.categoryList = {};
+      $scope.category = {};
       $scope.inventoryData = {};
       $scope.inventoryList = {};
       $scope.total = {};

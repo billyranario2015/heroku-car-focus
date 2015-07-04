@@ -30,6 +30,9 @@ app
       $scope.inventoryList = {};
       $scope.categoryShow = 'on-stock';
       $scope.total = {};
+      $scope.orderHolder = [];
+      $scope.addOnStock = [];
+
       $scope.lists = [ 
           { 'value' : 'on-stock' , 'category' : 'On Stock'  }, 
           { 'value' : 'direct-purchase' , 'category' : 'Direct Purchase'  }, 
@@ -72,6 +75,11 @@ app
         $( '.save-button' ).show();
         $( '#basket-ordered-lists' ).append( htmlList );
         $scope.inventoryData = "";
+
+        $scope.addOnStock.push($scope.inventoryData);
+        console.log( 'open' );
+        console.log($scope.addOnStock);
+        console.log( 'close' );
 
         getTotal( totalQuantityPrice , '+' );
        

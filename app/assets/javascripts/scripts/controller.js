@@ -63,8 +63,10 @@ app
                 $( '.form-direct-purchase' ).show();
             } else if( list.category_name == 'Product Order' ){
                 $( '.form-wrapper' ).css( 'display','none' );
-                $( '.form-product-order' ).show();
-            }      
+                // $( '.form-product-order' ).show();
+            }else{
+              $( '.form-on-stock' ).show();
+            }
       }
 
       // get inventories

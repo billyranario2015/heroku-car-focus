@@ -52,9 +52,7 @@ app
       // add inventory data
 
       
-      $scope.typeCategory = function typeCategory(){
-        // console.log(list);
-        
+      $scope.typeCategory = function typeCategory(){        
         $( '.form-wrapper' ).css( 'display','none' );
         $( '.form-on-stock' ).show();
         // if ( list.category_name == "On Stock" ) {

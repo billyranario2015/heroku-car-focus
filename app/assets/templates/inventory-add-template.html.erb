@@ -27,7 +27,8 @@
                        <div class="row">
                             <!-- form-on-stock -->
                             <div class="col-md-12 form-wrapper form-on-stock">
-                                <form class="overflow" ng-submit="submitStock()">
+                                <div class="col-md-7">
+                                    <form class="overflow" ng-submit="submitStock()">
                                     <div class="form-group" style="margin-bottom: 15px;overflow:hidden">
                                         <div class="col-md-4 remove-padding-left">
                                             <input type="hidden" ng-model="inventoryData.category_id" ng-init="inventoryData.category_id = 1">
@@ -72,8 +73,76 @@
                                         <div class="form-group overflow">
                                             <button class="btn btn-info" type="submit">Add Product</button>
                                         </div>   
-                                    </div>
-                                    <div class="item-list">
+                                    </div>                                    
+                                </div>
+                                <div class="col-md-5">
+                                   <div class="product-basket">
+                                       <div class="basket-content">
+                                           <h3 class="heading text-center">Selected Product</h3>
+                                           <div class="basket-list">
+                                               <ul class="list-unstyled lists">
+                                                   <li>
+                                                       <button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>
+                                                       <label><a href="" data-toggle="modal" data-target="#modal-edit-selection">Product 1</a></label>
+                                                       <span class="price pull-right">Php 200.00</span>
+                                                   </li>
+                                                   <li>
+                                                       <button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>
+                                                       <label><a href="" data-toggle="modal" data-target="#modal-edit-selection">Product 1</a></label>
+                                                       <span class="price pull-right">Php 200.00</span>
+                                                   </li>
+                                                   <li>
+                                                       <button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>
+                                                       <label><a href="" data-toggle="modal" data-target="#modal-edit-selection">Product 1</a></label>
+                                                       <span class="price pull-right">Php 200.00</span>
+                                                   </li>
+                                                   <li>
+                                                       <button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>
+                                                       <label><a href="" data-toggle="modal" data-target="#modal-edit-selection">Product 1</a></label>
+                                                       <span class="price pull-right">Php 200.00</span>
+                                                   </li>
+                                                   <li>
+                                                       <button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>
+                                                       <label><a href="" data-toggle="modal" data-target="#modal-edit-selection">Product 1</a></label>
+                                                       <span class="price pull-right">Php 200.00</span>
+                                                   </li>
+                                                   <li>
+                                                       <button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>
+                                                       <label><a href="" data-toggle="modal" data-target="#modal-edit-selection">Product 1</a></label>
+                                                       <span class="price pull-right">Php 200.00</span>
+                                                   </li>
+                                                   <li>
+                                                       <button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>
+                                                       <label><a href="" data-toggle="modal" data-target="#modal-edit-selection">Product 1</a></label>
+                                                       <span class="price pull-right">Php 200.00</span>
+                                                   </li>
+                                                   <li>
+                                                       <button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>
+                                                       <label><a href="" data-toggle="modal" data-target="#modal-edit-selection">Product 1</a></label>
+                                                       <span class="price pull-right">Php 200.00</span>
+                                                   </li>
+                                                   <li>
+                                                       <button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>
+                                                       <label><a href="" data-toggle="modal" data-target="#modal-edit-selection">Product 1</a></label>
+                                                       <span class="price pull-right">Php 200.00</span>
+                                                   </li>
+                                                   <li>
+                                                       <button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>
+                                                       <label><a href="" data-toggle="modal" data-target="#modal-edit-selection">Product 1</a></label>
+                                                       <span class="price pull-right">Php 200.00</span>
+                                                   </li>
+                                               </ul>
+                                           </div>
+                                           <div class="total-wrapper">
+                                               <h3>Total: <span class="pull-right">Php 200.00</span></h3>     
+                                           </div>
+                                           <div class="save-button">
+                                               <button class="btn btn-success float"><i class="fa fa-shopping-cart"></i> Save Procuct</button>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                                    <!-- <div class="item-list">
                                         <table class="table table-hover table-condense table-bordered">
                                             <thead>
                                                 <tr>
@@ -99,7 +168,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </div> -->
                                     <hr>
                                     <div class="form-action overflow">
                                         <div class="btn-button pull-right">

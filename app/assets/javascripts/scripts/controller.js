@@ -104,7 +104,7 @@ app
 
           $.each( $scope.addOnStock , function(i){
               if($scope.addOnStock[i].cartID === ID) {
-                  someArray.splice(i,1);
+                  $scope.addOnStock.splice(i,1);
                   return false;
               }
           });

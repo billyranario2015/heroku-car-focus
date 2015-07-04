@@ -21,9 +21,9 @@
                                             </select> -->
 
                                            <select class="form-control" id="inventory-category" style="margin-top:15px;">
-                                               <option ng-click="showCategoryForm('on-stock')">On Stock</option>
-                                               <option ng-click="showCategoryForm('direct-purchase')">Direct Purchase</option>
-                                               <option ng-click="showCategoryForm('product-order')">Product Order</option>
+                                               <option ng-change="showCategoryForm('on-stock')">On Stock</option>
+                                               <option ng-change="showCategoryForm('direct-purchase')">Direct Purchase</option>
+                                               <option ng-change="showCategoryForm('product-order')">Product Order</option>
                                            </select>
 
                                         </div>

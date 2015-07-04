@@ -60,6 +60,7 @@ app
       // }
 
        $scope.addToBasketStock = function addToBasketStock(){
+        console.log($scope.inventoryData);
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
         var htmlList = '<li>'
                      + '<button class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
@@ -72,7 +73,13 @@ app
         $scope.inventoryData = "";
 
         getTotal( totalQuantityPrice , '+' );
+       
        }
+
+       // $scope.removeToBasketStock = function removeToBasketStock() {
+        
+       // }
+
 
        function getTotal( orderValue , operation ) {
         var total = 0;

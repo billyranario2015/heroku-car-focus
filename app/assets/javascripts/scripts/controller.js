@@ -53,7 +53,7 @@ app
 
       
       $scope.typeCategory = function typeCategory(){
-        console.log(list);
+        // console.log(list);
         
         $( '.form-wrapper' ).css( 'display','none' );
         $( '.form-on-stock' ).show();

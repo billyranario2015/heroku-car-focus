@@ -28,7 +28,7 @@ app
       $scope.inventoryData = {};
       $scope.inventoryList = {};
       $scope.total = {};
-      $scope.category.lists = [ 
+      $scope.lists = [ 
           { 'value' : 'on-stock' , 'category' : 'On Stock'  }, 
           { 'value' : 'direct-purchase' , 'category' : 'Direct Purchase'  }, 
           { 'value' : 'product-order' , 'category' : 'Product Order'  }

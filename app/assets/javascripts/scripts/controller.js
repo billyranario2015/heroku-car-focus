@@ -34,7 +34,7 @@ app
           { 'value' : 'direct-purchase' , 'category' : 'Direct Purchase'  }, 
           { 'value' : 'product-order' , 'category' : 'Product Order'  }
       ];
-      $scope.category.list = $scope.lists[0].category;
+      $scope.category.list = $scope.lists[0];
       
       // Get list of services
       $scope.categories = function categories(){

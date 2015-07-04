@@ -64,7 +64,7 @@ app
         var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
         var htmlList = '<li>'
-                     + '<button value="'+ randomID +'" class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
+                     + '<button id="' + randomID + '" ng-click="removeToBasketStock( ' + randomID + ' , ' + totalQuantityPrice + ' )" class="btn btn-default"data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
                      + '<label><a href="#" data-toggle="modal" data-target="#modal-edit-selection">'+ $scope.inventoryData.product_name +'</a></label>'
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
@@ -77,9 +77,11 @@ app
        
        }
 
-       // $scope.removeToBasketStock = function removeToBasketStock() {
-        
-       // }
+       $scope.removeToBasketStock = function removeToBasketStock( orderID , qtyPrice ) {
+          var priceValue = parseFloat( qtyPrice );
+          getTotal( priceValue , '-' );
+          $( '#' + orderID ).parent().fadeOut();
+       }
 
 
        function getTotal( orderValue , operation ) {

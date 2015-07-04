@@ -77,7 +77,7 @@ app
 
         $scope.addOnStock.push({ 
           'category_id' : $scope.inventoryData.category_id ,  
-          'transaction_date' : $scope.inventoryData.transaction_date ,
+          'transaction_date' : Date.now() ,
           'price' : $scope.inventoryData.price ,
           'product_name' : $scope.inventoryData.product_name ,
           'product_details' : $scope.inventoryData.product_details ,

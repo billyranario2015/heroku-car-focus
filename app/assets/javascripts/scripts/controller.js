@@ -64,8 +64,7 @@ app
 
        $scope.addToBasketStock = function addToBasketStock(){
         // console.log($scope.inventoryData);
-        var today = new Date();
-        var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
+        var randomID = Date.now() + '-' + Math.random().toString(36).slice(2);
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
         var htmlList = '<li>'
                      + '<button priceQtyValue="'+totalQuantityPrice+'" id="' + randomID + '" class="btn btn-default btn-remove-stock-order" data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
@@ -77,6 +76,7 @@ app
         $( '#basket-ordered-lists' ).append( htmlList );
 
         $scope.addOnStock.push({ 
+          'cartID' : randomID,
           'category_id' : $scope.inventoryData.category_id ,  
           'transaction_date' : today.toISOString().substring(0, 10) ,
           'price' : $scope.inventoryData.price ,
@@ -100,6 +100,14 @@ app
           var pqv = $( this ).attr( 'priceQtyValue' );
           var priceValue = parseFloat( pqv );
           getTotal( priceValue , '-' );
+
+          $.each( $scope.addOnStock , function(i){
+              if($scope.addOnStock[i].name === ID) {
+                  someArray.splice(i,1);
+                  return false;
+              }
+          });
+
           $( '#' + ID ).parent().remove();
        } );
 

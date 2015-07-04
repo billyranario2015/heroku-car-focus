@@ -62,13 +62,17 @@ app
       $scope.showCategoryForm = function showCategoryForm( categoryType ) {
         
         if (categoryType.value == 'on-stock') {
-          $scope.categoryShow = categoryType.value;
+          $( '.form-wrapper' ).css( 'display','none' );
+          $( '.form-' + categoryType.value ).show();
         } else if(categoryType.value == 'direct-purchase') {
-          $scope.categoryShow = categoryType.value;
+          $( '.form-wrapper' ).css( 'display','none' );
+          $( '.form-' + categoryType.value ).show();
         } else if(categoryType.value == 'product-order') {
-          $scope.categoryShow = categoryType.value;
+          $( '.form-wrapper' ).css( 'display','none' );
+          $( '.form-' + categoryType.value ).show();
         } else {
-          $scope.categoryShow = 'on-stock';
+          $( '.form-wrapper' ).css( 'display','none' );
+          $( '.form-on-stock' ).show();
         };
       }
 

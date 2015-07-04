@@ -37,7 +37,7 @@
                            <div class="form-categories">
                                <div class="row">
                                     <!-- form-on-stock -->
-                                    <div class="col-md-12 form-wrapper form-on-stock" ng-if="categoryShow == 'on-stock' ">
+                                    <div class="col-md-12 form-wrapper form-on-stock">
                                         <div class="col-md-12 remove-side-padding">
                                             <form class="overflow" ng-submit="submitStock()">
                                             <div class="form-group" style="margin-bottom: 15px;overflow:hidden">
@@ -117,7 +117,7 @@
                                         </form>
                                    </div>
                                    <!-- form-direct-purchase -->
-                                   <div class="col-md-12 form-wrapper form-direct-purchase" ng-if="categoryShow == 'direct-purchase' ">
+                                   <div class="col-md-12 form-wrapper form-direct-purchase" hidden>
                                        <div class="direct-purchase-fields">
                                            <div class="form-group">
                                                <label>O.R Number</label>
@@ -195,7 +195,7 @@
                                        </div>
                                    </div>
                                    <!-- form-product-order -->
-                                   <div class="col-md-12 form-wrapper form-product-order" ng-if="categoryShow == 'product-order' ">
+                                   <div class="col-md-12 form-wrapper form-product-order" hidden>
                                         <div class="product-order-fields">
                                             <div class="form-group">
                                                 <label>Manufacturer:</label>

@@ -28,16 +28,6 @@ app
       $scope.inventoryData = {};
       $scope.inventoryList = {};
       $scope.total = {};
-      // $scope.lists = [ 
-      //     { 'value' : 'on-stock' , 'category' : 'On Stock'  }, 
-      //     { 'value' : 'direct-purchase' , 'category' : 'Direct Purchase'  }, 
-      //     { 'value' : 'product-order' , 'category' : 'Product Order'  }
-      // ];
-      $scope.lists = [ 
-          'On Stock', 
-          'Direct Purchase', 
-          'Product Order'
-      ];
 
       // Get list of services
       $scope.categories = function categories(){
@@ -61,7 +51,7 @@ app
       }
       // add inventory data
 
-      $scope.showCategoryForm = function typeCategory( categoryType ) {
+      $scope.showCategoryForm = function showCategoryForm( categoryType ) {
         alert(categoryType);
       }
 

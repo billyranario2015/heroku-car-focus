@@ -20,14 +20,11 @@
                                                 <option ng-repeat="list in lists" ng-click="showCategoryForm(list.value)">{{ list.category }}</option>
                                             </select> -->
 
-                                            <select 
-                                                class="form-control" 
-                                                id="inventory-category" 
-                                                style="margin-top:15px;"
-                                                ng-model="selectedCategory"
-                                                ng-options="list in list for lists" 
-                                            >
-                                            </select>
+                                           <select class="form-control" id="inventory-category" style="margin-top:15px;">
+                                               <option ng-click="showCategoryForm('on-stock')">On Stock</option>
+                                               <option ng-click="showCategoryForm('direct-purchase')">Direct Purchase</option>
+                                               <option ng-click="showCategoryForm('product-order')">Product Order</option>
+                                           </select>
 
                                         </div>
 

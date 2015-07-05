@@ -119,7 +119,14 @@ app
        // Pass data to modal edit form
        $( 'body' ).delegate( '.edit-selection' , 'click' , function(){
         var ID = $( this ).attr( 'id' );
-        console.log( $scope.addOnStock );
+         $.each( $scope.addOnStock , function(i){
+              console.log( $scope.addOnStock[i].cartID +' == '+ ID );
+              if($scope.addOnStock[i].cartID == ID) {
+                  $scope.dataEdit = $scope.addOnStock[i];
+              }
+              console.log( $scope.dataEdit );
+          });
+          console.log( $scope.addOnStock );
        } );
 
        function getTotal( orderValue , operation ) {

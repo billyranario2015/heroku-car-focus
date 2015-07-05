@@ -66,16 +66,12 @@ app
       // }
 
        $scope.addToBasketStock = function addToBasketStock(){
+        console.log( 'Added to On Stock basket' );
         console.log($scope.inventoryData);
         var today = new Date();
         var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
         var htmlListOnStock = '<li>'
-                     + '<button priceQtyValue="'+totalQuantityPrice+'" id="' + randomID + '" class="btn btn-default btn-remove-stock-order" data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
-                     + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
-                     + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
-                     + '</li>';
-        var htmlListDirPurchase = '<li>'
                      + '<button priceQtyValue="'+totalQuantityPrice+'" id="' + randomID + '" class="btn btn-default btn-remove-stock-order" data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
                      + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
@@ -105,6 +101,20 @@ app
        
        }
 
+
+      $scope.addToBasketDirPurch = function addToBasketDirPurch(){
+        console.log( 'Added to On Stock basket' );
+        console.log($scope.inventoryData);
+        var today = new Date();
+        var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
+        var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
+        var htmlListDirPurchase = '<li>'
+                     + '<button priceQtyValue="'+totalQuantityPrice+'" id="' + randomID + '" class="btn btn-default btn-remove-stock-order" data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
+                     + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
+                     + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
+                     + '</li>';
+        $( '#basket-ordered-lists' ).append( htmlListDirPurchase );             
+      }
        // To Remove the Added Product
        $( 'body' ).delegate( '.btn-remove-stock-order' , 'click' , function(){
           var ID = $( this ).attr( 'id' );

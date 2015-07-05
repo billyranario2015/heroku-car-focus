@@ -96,7 +96,7 @@
                                            <form ng-submit="">
                                                <div class="form-group">
                                                    <label>O.R Number</label>
-                                                   <input type="text" class="form-control" ng-model="inventoryData.or" style="width:30%">
+                                                   <input type="text" class="form-control" ng-model="inventoryData.or_number">
                                                </div>
                                                <div class="form-group row">
                                                     <div class="col-md-6">
@@ -104,12 +104,12 @@
                                                        <input type="text" ng-model="inventoryData.incharge"  class="form-control">
                                                     </div>
                                                     <div class="col-md-6">
-                                                       <input type="text" class="form-control" ng-model="inventoryData.cash_on_hand" placeholder="Cash on hand" style="width:35%;margin-top:25px;">
+                                                       <input type="text" class="form-control" ng-model="inventoryData.cash_on_hand" placeholder="Cash on hand" style="margin-top:25px;">
                                                     </div>
                                                </div>
                                                <div class="form-group">
                                                    <label>Store</label>
-                                                   <input type="text" ng-model="inventoryData.store" class="form-control" style="width:30%;">
+                                                   <input type="text" ng-model="inventoryData.store" class="form-control">
                                                </div>
                                                <div class="form-group row">
                                                     <div class="col-md-4">
@@ -118,11 +118,11 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>Quantity</label>
-                                                        <input type="text" ng-model="inventoryData.quantity" class="form-control">
+                                                        <input type="number" ng-model="inventoryData.quantity" class="form-control">
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>Price</label>
-                                                        <input type="text" ng-model="inventoryData.price" class="form-control">
+                                                        <input type="number" ng-model="inventoryData.price" class="form-control">
                                                     </div>
                                                </div>
                                                <div class="btn-add-new text-right margin-btm-md">

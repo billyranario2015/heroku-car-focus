@@ -21,8 +21,7 @@ app
     "$scope",
     "$http",
     "CarServer",
-    "$timeout",
-    function controller($scope, $http, $timeout, CarServer)
+    function controller($scope, $http, CarServer)
     {
       console.log("inventoryAddCtrl");
       $scope.categoryList = {};
@@ -123,7 +122,7 @@ app
          $.each( $scope.addOnStock , function(i){
               console.log( $scope.addOnStock[i].cartID +' == '+ ID );
               if($scope.addOnStock[i].cartID == ID) {
-                  $timeout(function(){
+                  setTimeout(function(){
                     $scope.dataEdit = $scope.addOnStock[i];
                   },10)
               }

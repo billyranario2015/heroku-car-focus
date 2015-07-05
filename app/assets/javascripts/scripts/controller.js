@@ -70,7 +70,7 @@ app
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
         var htmlList = '<li>'
                      + '<button priceQtyValue="'+totalQuantityPrice+'" id="' + randomID + '" class="btn btn-default btn-remove-stock-order" data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
-                     + '<label><a href="#" data-toggle="modal" data-target="#modal-edit-selection">'+ $scope.inventoryData.product_name +'</a></label>'
+                     + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
         $( '.total-wrapper' ).show();
@@ -78,7 +78,22 @@ app
         $( '#basket-ordered-lists' ).append( htmlList );
         $scope.inventoryData = "";
 
+        $scope.addOnStock.push({ 
+          'cartID' : randomID,
+          'category_id' : $scope.inventoryData.category_id ,  
+          'transaction_date' : today.toISOString().substring(0, 10) ,
+          'price' : $scope.inventoryData.price ,
+          'product_name' : $scope.inventoryData.product_name ,
+          'product_details' : $scope.inventoryData.product_details ,
+          'product_type ' : $scope.inventoryData.product_type   ,
+          'quantity' : $scope.inventoryData.quantity ,
+        });
 
+        $scope.inventoryData.price = "";
+        $scope.inventoryData.product_name = "";
+        $scope.inventoryData.product_details = "";
+        $scope.inventoryData.product_type = "";
+        $scope.inventoryData.quantity = "";
 
         getTotal( totalQuantityPrice , '+' );
        
@@ -89,6 +104,14 @@ app
           var pqv = $( this ).attr( 'priceQtyValue' );
           var priceValue = parseFloat( pqv );
           getTotal( priceValue , '-' );
+
+          $.each( $scope.addOnStock , function(i){
+              if($scope.addOnStock[i].cartID === ID) {
+                  $scope.addOnStock.splice(i,1);
+                  return false;
+              }
+          });
+          console.log($scope.addOnStock);
           $( '#' + ID ).parent().remove();
        } );
 

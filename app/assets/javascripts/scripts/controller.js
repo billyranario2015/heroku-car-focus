@@ -120,18 +120,19 @@ app
        $( 'body' ).delegate( '.edit-selection' , 'click' , function(){
         var ID = $( this ).attr( 'id' );
          $.each( $scope.addOnStock , function(i){
+
+              console.log( $scope.addOnStock[i]);
               console.log( $scope.addOnStock[i].cartID +' == '+ ID );
-              if($scope.addOnStock[i].cartID == ID) {
-                  setTimeout(function(){
-                    $scope.dataEdit.price = $scope.addOnStock[i].price;
-                    $scope.dataEdit.product_name = $scope.addOnStock[i].product_name;
-                    $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;
-                    $scope.dataEdit.product_type = $scope.addOnStock[i].product_type;
-                    $scope.dataEdit.quantity = $scope.addOnStock[i].quantity;
-                  },10)
-                console.log( $scope.dataEdit ); 
-                console.log( $scope.addOnStock[i].product_name );
-              }
+              
+              // if($scope.addOnStock[i].cartID == ID) {
+              //     setTimeout(function(){
+              //       $scope.dataEdit.price = $scope.addOnStock[i].price;
+              //       $scope.dataEdit.product_name = $scope.addOnStock[i].product_name;
+              //       $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;
+              //       $scope.dataEdit.product_type = $scope.addOnStock[i].product_type;
+              //       $scope.dataEdit.quantity = $scope.addOnStock[i].quantity;
+              //     },10)
+              // }
           });
        } );
 

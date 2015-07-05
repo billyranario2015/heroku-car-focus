@@ -65,18 +65,19 @@ app
       //   $scope.inventoryData = "";
       // }
 
+      // Add On Stock to Basket 
        $scope.addToBasketStock = function addToBasketStock(){
         console.log( 'Added to On Stock basket' );
         console.log($scope.inventoryData);
         var today = new Date();
         var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
-        var htmlListOnStock = '<li>'
+        var htmlList = '<li>'
                      + '<button priceQtyValue="'+totalQuantityPrice+'" id="' + randomID + '" class="btn btn-default btn-remove-stock-order" data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
                      + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
-        $( '#basket-ordered-lists' ).append( htmlListOnStock );
+        $( '#basket-ordered-lists' ).append( htmlList );
 
         $scope.addOnStock.push({ 
           'cartID' : randomID,
@@ -100,18 +101,19 @@ app
        }
 
 
+      // Add Direct Purchase to Basket 
       $scope.addToBasketDirPurch = function addToBasketDirPurch(){
         console.log( 'Added to On Stock basket' );
         console.log($scope.inventoryData);
         var today = new Date();
         var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
-        var htmlListDirPurchase = '<li>'
+        var htmlList = '<li>'
                      + '<button priceQtyValue="'+totalQuantityPrice+'" id="' + randomID + '" class="btn btn-default btn-remove-stock-order" data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
                      + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
-        $( '#basket-ordered-lists' ).append( htmlListDirPurchase );  
+        $( '#basket-ordered-lists' ).append( htmlList );  
         getTotal( totalQuantityPrice , '+' );
 
         $scope.inventoryData.or_number = "";
@@ -122,6 +124,28 @@ app
         $scope.inventoryData.product_details = "";
         $scope.inventoryData.price = "";
         $scope.inventoryData.quantity = "";  
+      }
+
+      // Add Product Order to Basket 
+      $scope.addToBasketProdOrder = function addToBasketProdOrder(){
+        console.log( 'Added to Prodct Order basket' );
+        console.log($scope.inventoryData);
+        var today = new Date();
+        var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
+        var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
+        var htmlList = '<li>'
+                     + '<button priceQtyValue="'+totalQuantityPrice+'" id="' + randomID + '" class="btn btn-default btn-remove-stock-order" data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
+                     + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
+                     + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
+                     + '</li>';
+        $( '#basket-ordered-lists' ).append( htmlList );  
+        getTotal( totalQuantityPrice , '+' );
+        
+        $scope.inventoryData.product_name = "";
+        $scope.inventoryData.quantity = "";
+        $scope.inventoryData.price = "";
+        $scope.inventoryData.product_type = "";
+        $scope.inventoryData.product_details = "";
       }
 
 

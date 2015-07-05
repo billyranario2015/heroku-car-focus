@@ -142,30 +142,30 @@
 
                                    <!-- form-product-order -->
                                    <div class="col-md-12 form-wrapper form-product-order" hidden>
-                                        <div class="product-order-fields">
-                                            <div class="form-group">
-                                                <label>Manufacturer:</label>
-                                                <input type="text" class="form-control" style="width:40%;">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Address:</label>
-                                                <textarea class="form-control" rows="5"></textarea>
-                                            </div>
-                                        </div>
                                         <div class="form-info manufacturer">
-                                            <form class="overflow">
+                                            <form class="overflow" ng-submit="addToBasketProdOrder()">
+                                                <div class="product-order-fields">
+                                                    <div class="form-group">
+                                                        <label>Manufacturer:</label>
+                                                        <input type="text" ng-model="inventoryData.manufacturer" class="form-control" style="width:40%;">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Address:</label>
+                                                        <textarea class="form-control" ng-model="inventoryData.address" rows="5"></textarea>
+                                                    </div>
+                                                </div>
                                                 <div class="form-group" style="margin-bottom: 15px;overflow:hidden">
                                                     <div class="col-md-4 remove-padding-left">
                                                         <label>Product</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" ng-model="inventoryData.product_name" class="form-control">
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>Quantity</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" ng-model="inventoryData.quantity" class="form-control">
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>Price</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" ng-model="inventoryData.price" class="form-control">
                                                     </div>
                                                 </div>
 
@@ -175,13 +175,13 @@
                                                         <div class="col-md-12">
                                                             <div class="radio inline-block">
                                                                 <label style="margin-right: 20px;">
-                                                                    <input name="category" type="radio" value="">
+                                                                    <input name="category" ng-model="inventoryData.product_type" ng-init="inventory.product_type = 'Wholesale' " type="radio" value="">
                                                                     Wholesale
                                                                 </label>
                                                             </div>
                                                             <div class="radio inline-block">
                                                                 <label>
-                                                                    <input name="category" type="radio" value="">
+                                                                    <input name="category" ng-model="inventoryData.product_type" ng-init="inventory.product_type = 'Retail' " type="radio" value="">
                                                                     Retail
                                                                 </label>
                                                             </div>
@@ -190,51 +190,12 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Product Details</label>
-                                                    <textarea class="form-control" rows="5"></textarea>
+                                                    <textarea class="form-control" ng-model="inventoryData.product_details" rows="5"></textarea>
                                                 </div>
                                                 <div class="remove-padding-left text-right">
                                                     <div class="form-group overflow">
                                                         <button class="btn btn-info">Add Product</button>
                                                     </div>   
-                                                </div>
-                                                <div class="item-list">
-                                                    <table class="table table-hover table-condense table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Product Name</th>
-                                                                <th>Quantity</th>
-                                                                <th>Manufacturer</th>
-                                                                <th>Price</th>
-                                                                <th>Type</th>
-                                                                <th>Total</th>
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Spracket</td>
-                                                                <td>3</td>
-                                                                <td>Kabee</td>
-                                                                <td>32.00</td>
-                                                                <td>Wholesale</td>
-                                                                <td>96.00</td>
-                                                                <td>
-                                                                    <a href="#"><label class="label label-primary"><i class="fa fa-edit"></i> Edit</label></a>
-                                                                    <a href="#"><label class="label label-danger"><i class="fa fa-trash"></i> Remove</label></a>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <hr>
-                                                <div class="form-action overflow">
-                                                    <div class="btn-button pull-right">
-                                                        <button class="btn btn-success">Save</button>
-                                                    </div>
-                                                    <div class="btn-button pull-left" style="font-size:24px;">
-                                                        <label>Total:</label>
-                                                        &nbsp; <span class="text-primary">PHP 1,540</span>
-                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

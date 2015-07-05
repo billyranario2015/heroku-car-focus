@@ -122,14 +122,16 @@ app
         var ID = $( this ).attr( 'id' );
          $.each( $scope.addOnStock , function(i){
             console.log( $scope.addOnStock[i] );
-            $timeout(function(){
-              $scope.dataEdit.cartID = ID;
-              $scope.dataEdit.price = $scope.addOnStock[i].price;
-              $scope.dataEdit.product_name = $scope.addOnStock[i].product_name;
-              $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;
-              $scope.dataEdit.product_type = $scope.addOnStock[i].product_type;
-              $scope.dataEdit.quantity = $scope.addOnStock[i].quantity;
-            },10);
+            if ( $scope.addOnStock[i].cartID == ID ) {
+              $timeout(function(){
+                $scope.dataEdit.cartID = ID;
+                $scope.dataEdit.price = $scope.addOnStock[i].price;
+                $scope.dataEdit.product_name = $scope.addOnStock[i].product_name;
+                $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;
+                $scope.dataEdit.product_type = $scope.addOnStock[i].product_type;
+                $scope.dataEdit.quantity = $scope.addOnStock[i].quantity;
+              },10);
+            };
 
           });
        } );

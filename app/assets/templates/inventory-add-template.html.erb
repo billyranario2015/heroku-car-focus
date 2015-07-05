@@ -310,15 +310,15 @@
                     <div class="form-group" style="margin-bottom: 15px;overflow:hidden">
                         <div class="col-md-12">
                             <label>Product Name</label>
-                            <input type="text"  class="form-control">
+                            <input type="text" ng-model="dataEdit.product_name"  class="form-control">
                         </div>
                         <div class="col-md-12">
                             <label>Quantity</label>
-                            <input type="text" class="form-control">
+                            <input type="text" ng-model="dataEdit.quantity" class="form-control">
                         </div>
                         <div class="col-md-12">
                             <label>Price</label>
-                            <input type="text" class="form-control">
+                            <input type="text" ng-model="dataEdit.price" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -327,13 +327,13 @@
                             <div class="col-md-12">
                                 <div class="radio inline-block">
                                     <label style="margin-right: 20px;">
-                                        <input name="category" type="radio" value="">
+                                        <input name="category" ng-model="dataEdit.product_type" type="radio">
                                         Wholesale
                                     </label>
                                 </div>
                                 <div class="radio inline-block">
                                     <label>
-                                        <input name="category" type="radio" value="">
+                                        <input name="category" ng-model="dataEdit.product_type" type="radio">
                                         Retail
                                     </label>
                                 </div>
@@ -343,15 +343,16 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Product Details</label>
-                            <textarea class="form-control" rows="5"></textarea>
+                            <textarea class="form-control" ng-model="dataEdit.product_details" rows="5"></textarea>
                         </div>
                     </div>
-                </form>
+                
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" value="Save Changes">
+            </form>
         </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -30,6 +30,8 @@ app
       $scope.inventoryList = {};
       $scope.categoryShow = 'on-stock';
       $scope.total = {};
+      $scope.dataEdit = {};
+
       $scope.orderHolder = [];
       $scope.addOnStock = [];
 
@@ -116,19 +118,21 @@ app
           $( '#' + ID ).parent().remove();
        } );
 
-       // Get the date to be edited
+       // Display the edited info to the modal
        $( 'body' ).delegate( '.edit-selection' , 'click' , function(){
           var ID = $( this ).attr( 'id' );
 
           $.each( $scope.addOnStock , function(i){
               if($scope.addOnStock[i].cartID === ID) {
-                  alert(true);
+                $scope.dataEdit.price           = $scope.addOnStock[i].price ;
+                $scope.dataEdit.product_name    = $scope.addOnStock[i].product_name;
+                $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;
+                $scope.dataEdit.product_type    = $scope.addOnStock[i].product_type;
+                $scope.dataEdit.quantity        = $scope.addOnStock[i].quantity;
               }
           });
 
-          console.log($scope.addOnStock);
-
-          $( '#' + ID ).parent().remove();
+          console.log($scope.dataEdit);
        } );
 
        // Calculates the total amount to be payed

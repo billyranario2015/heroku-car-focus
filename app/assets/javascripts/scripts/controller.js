@@ -121,6 +121,7 @@ app
        $( 'body' ).delegate( '.edit-selection' , 'click' , function(){
         var ID = $( this ).attr( 'id' );
          $.each( $scope.addOnStock , function(i){
+            console.log( $scope.addOnStock[i].product_details );
             $timeout(function(){
               $scope.dataEdit.price = $scope.addOnStock[i].price;
               $scope.dataEdit.product_name = $scope.addOnStock[i].product_name;

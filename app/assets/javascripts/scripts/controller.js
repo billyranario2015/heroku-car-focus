@@ -115,6 +115,8 @@ app
                      + '</li>';
         $( '#basket-ordered-lists' ).append( htmlListDirPurchase );             
       }
+
+      
        // To Remove the Added Product
        $( 'body' ).delegate( '.btn-remove-stock-order' , 'click' , function(){
           var ID = $( this ).attr( 'id' );

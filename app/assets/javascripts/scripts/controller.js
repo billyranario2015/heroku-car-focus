@@ -117,6 +117,11 @@ app
           $( '#' + ID ).parent().remove();
        } );
 
+       $( 'body' ).delegate( '.edit-selection' , 'click' , function(){
+        var ID = $( this ).attr( 'id' );
+        alert( ID );
+       } );
+
        function getTotal( orderValue , operation ) {
         var total = 0;
         if ( operation == '+' ) {

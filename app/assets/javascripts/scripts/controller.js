@@ -123,6 +123,7 @@ app
          $.each( $scope.addOnStock , function(i){
             console.log( $scope.addOnStock[i] );
             $timeout(function(){
+              $scope.dataEdit.cartID = ID;
               $scope.dataEdit.price = $scope.addOnStock[i].price;
               $scope.dataEdit.product_name = $scope.addOnStock[i].product_name;
               $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;

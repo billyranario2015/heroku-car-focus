@@ -90,11 +90,11 @@ app
           'quantity' : $scope.inventoryData.quantity ,
         });
 
-        // $scope.inventoryData.price = "";
-        // $scope.inventoryData.product_name = "";
-        // $scope.inventoryData.product_details = "";
-        // $scope.inventoryData.product_type = "";
-        // $scope.inventoryData.quantity = "";
+        $scope.inventoryData.price = "";
+        $scope.inventoryData.product_name = "";
+        $scope.inventoryData.product_details = "";
+        $scope.inventoryData.product_type = "";
+        $scope.inventoryData.quantity = "";
 
         getTotal( totalQuantityPrice , '+' );
        

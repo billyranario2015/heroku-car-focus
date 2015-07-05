@@ -21,7 +21,8 @@ app
     "$scope",
     "$http",
     "CarServer",
-    function controller($scope, $http, CarServer)
+    "$timeout",
+    function controller($scope, $http, CarServer , $timeout)
     {
       console.log("inventoryAddCtrl");
       $scope.categoryList = {};
@@ -123,15 +124,15 @@ app
 
               console.log( $scope.addOnStock[i]);
               console.log( $scope.addOnStock[i].cartID +' == '+ ID );
-              
+
+              $timeout(function(){
+                $scope.dataEdit.price = $scope.addOnStock[i].price;
+                $scope.dataEdit.product_name = $scope.addOnStock[i].product_name;
+                $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;
+                $scope.dataEdit.product_type = $scope.addOnStock[i].product_type;
+                $scope.dataEdit.quantity = $scope.addOnStock[i].quantity;
+              },10)
               // if($scope.addOnStock[i].cartID == ID) {
-              //     setTimeout(function(){
-              //       $scope.dataEdit.price = $scope.addOnStock[i].price;
-              //       $scope.dataEdit.product_name = $scope.addOnStock[i].product_name;
-              //       $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;
-              //       $scope.dataEdit.product_type = $scope.addOnStock[i].product_type;
-              //       $scope.dataEdit.quantity = $scope.addOnStock[i].quantity;
-              //     },10)
               // }
           });
        } );

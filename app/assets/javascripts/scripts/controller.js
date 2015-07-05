@@ -70,14 +70,19 @@ app
         var today = new Date();
         var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
-        var htmlList = '<li>'
+        var htmlListOnStock = '<li>'
+                     + '<button priceQtyValue="'+totalQuantityPrice+'" id="' + randomID + '" class="btn btn-default btn-remove-stock-order" data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
+                     + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
+                     + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
+                     + '</li>';
+        var htmlListDirPurchase = '<li>'
                      + '<button priceQtyValue="'+totalQuantityPrice+'" id="' + randomID + '" class="btn btn-default btn-remove-stock-order" data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
                      + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
         $( '.total-wrapper' ).show();
         $( '.save-button' ).show();
-        $( '#basket-ordered-lists' ).append( htmlList );
+        $( '#basket-ordered-lists' ).append( htmlListOnStock );
 
         $scope.addOnStock.push({ 
           'cartID' : randomID,
@@ -161,12 +166,15 @@ app
         
         if (categoryType.value == 'on-stock') {
           $( '.form-wrapper' ).css( 'display','none' );
+          $( '.form-' + categoryType.value ).show();
           $scope.inventoryData.price = "";
         } else if(categoryType.value == 'direct-purchase') {
           $( '.form-wrapper' ).css( 'display','none' );
+          $( '.form-' + categoryType.value ).show();
           $scope.inventoryData.price = "";
         } else if(categoryType.value == 'product-order') {
           $( '.form-wrapper' ).css( 'display','none' );
+          $( '.form-' + categoryType.value ).show();
           $scope.inventoryData.price = "";
         } else {
           $( '.form-wrapper' ).css( 'display','none' );

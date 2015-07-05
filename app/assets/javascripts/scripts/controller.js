@@ -76,8 +76,6 @@ app
                      + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
-        $( '.total-wrapper' ).show();
-        $( '.save-button' ).show();
         $( '#basket-ordered-lists' ).append( htmlListOnStock );
 
         $scope.addOnStock.push({ 
@@ -116,15 +114,13 @@ app
         $( '#basket-ordered-lists' ).append( htmlListDirPurchase );  
         getTotal( totalQuantityPrice , '+' );
 
-        $( '.total-wrapper' ).show();
-        $( '.save-button' ).show();
-        
         $scope.inventoryData.or_number = "";
         $scope.inventoryData.incharge = "";
         $scope.inventoryData.cash_on_hand = "";
         $scope.inventoryData.store = "";
         $scope.inventoryData.product_name = "";
         $scope.inventoryData.product_details = "";
+        $scope.inventoryData.price = "";
         $scope.inventoryData.quantity = "";  
       }
 

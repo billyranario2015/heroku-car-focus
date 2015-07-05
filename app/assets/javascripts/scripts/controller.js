@@ -69,7 +69,7 @@ app
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
         var htmlList = '<li>'
                      + '<button priceQtyValue="'+totalQuantityPrice+'" id="' + randomID + '" class="btn btn-default btn-remove-stock-order" data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
-                     + '<label><a href="#" data-toggle="modal" data-target="#modal-edit-selection">'+ $scope.inventoryData.product_name +'</a></label>'
+                     + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
         $( '.total-wrapper' ).show();
@@ -99,6 +99,7 @@ app
        
        }
 
+      // To Remove the Added Product
        $( 'body' ).delegate( '.btn-remove-stock-order' , 'click' , function(){
           var ID = $( this ).attr( 'id' );
           var pqv = $( this ).attr( 'priceQtyValue' );
@@ -111,13 +112,26 @@ app
                   return false;
               }
           });
+          console.log($scope.addOnStock);
+          $( '#' + ID ).parent().remove();
+       } );
+
+       // Get the date to be edited
+       $( 'body' ).delegate( '.edit-selection' , 'click' , function(){
+          var ID = $( this ).attr( 'id' );
+
+          $.each( $scope.addOnStock , function(i){
+              if($scope.addOnStock[i].cartID === ID) {
+                  alert(true);
+              }
+          });
 
           console.log($scope.addOnStock);
 
           $( '#' + ID ).parent().remove();
        } );
 
-
+       // Calculates the total amount to be payed
        function getTotal( orderValue , operation ) {
         var total = 0;
         if ( operation == '+' ) {

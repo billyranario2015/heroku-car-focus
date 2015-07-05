@@ -124,10 +124,10 @@ app
               if($scope.addOnStock[i].cartID == ID) {
                   $scope.dataEdit = $scope.addOnStock[i];
               }
-              console.log( $scope.addOnStock );
               console.log( $scope.addOnStock[i] );
               console.log( $scope.dataEdit );
           });
+              console.log( $scope.addOnStock );
        } );
 
        function getTotal( orderValue , operation ) {

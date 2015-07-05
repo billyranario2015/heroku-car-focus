@@ -77,7 +77,6 @@ app
         $( '.total-wrapper' ).show();
         $( '.save-button' ).show();
         $( '#basket-ordered-lists' ).append( htmlList );
-        $scope.inventoryData = "";
 
         $scope.addOnStock.push({ 
           'cartID' : randomID,
@@ -89,6 +88,12 @@ app
           'product_type ' : $scope.inventoryData.product_type   ,
           'quantity' : $scope.inventoryData.quantity ,
         });
+
+        $scope.inventoryData.price = "";
+        $scope.inventoryData.product_name = "";
+        $scope.inventoryData.product_details = "";
+        $scope.inventoryData.product_type = "";
+        $scope.inventoryData.quantity = "";
 
         getTotal( totalQuantityPrice , '+' );
        

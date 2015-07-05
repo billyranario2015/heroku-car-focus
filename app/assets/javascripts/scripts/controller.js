@@ -167,21 +167,25 @@ app
         if (categoryType.value == 'on-stock') {
           $( '.form-wrapper' ).css( 'display','none' );
           $( '.form-' + categoryType.value ).show();
-          $scope.inventoryData.price = "";
+          $( '#basket-ordered-lists li' ).remove();
+          $scope.inventoryData = "";
+
         } else if(categoryType.value == 'direct-purchase') {
           $( '.form-wrapper' ).css( 'display','none' );
           $( '.form-' + categoryType.value ).show();
-          $scope.inventoryData.price = "";
+          $( '#basket-ordered-lists li' ).remove();
+          $scope.inventoryData = "";
+
         } else if(categoryType.value == 'product-order') {
           $( '.form-wrapper' ).css( 'display','none' );
           $( '.form-' + categoryType.value ).show();
-          $scope.inventoryData.price = "";
+          $( '#basket-ordered-lists li' ).remove();
+          $scope.inventoryData = "";
+
         } else {
           $( '.form-wrapper' ).css( 'display','none' );
           $( '.form-on-stock' ).show();
         };
-        $scope.inventoryData.price = "";
-        $( '#basket-ordered-lists li' ).remove();
       }
       $scope.showCategoryForm(false);
 

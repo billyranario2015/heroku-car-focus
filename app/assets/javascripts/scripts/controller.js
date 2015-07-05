@@ -181,6 +181,7 @@ app
           $( '.form-on-stock' ).show();
         };
         $scope.inventoryData.price = "";
+        $( '#basket-ordered-lists li' ).remove();
       }
       $scope.showCategoryForm(false);
 

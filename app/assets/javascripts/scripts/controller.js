@@ -117,7 +117,15 @@ app
         getTotal( totalQuantityPrice , '+' );
 
         $( '.total-wrapper' ).show();
-        $( '.save-button' ).show();     
+        $( '.save-button' ).show();
+        
+        $scope.inventoryData.or_number = "";
+        $scope.inventoryData.incharge = "";
+        $scope.inventoryData.cash_on_hand = "";
+        $scope.inventoryData.store = "";
+        $scope.inventoryData.product_name = "";
+        $scope.inventoryData.product_details = "";
+        $scope.inventoryData.quantity = "";  
       }
 
 

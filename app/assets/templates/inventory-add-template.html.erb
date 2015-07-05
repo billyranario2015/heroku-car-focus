@@ -94,6 +94,9 @@
                                    <div class="col-md-12 form-wrapper form-direct-purchase" hidden>
                                        <div class="direct-purchase-fields">
                                            <form ng-submit="addToBasketDirPurch()">
+
+                                                <input type="hidden" ng-model="inventoryData.category_id" ng-init="inventoryData.category_id = 2">
+                                                <input type="hidden" ng-model="inventoryData.transaction_date" ng-init="inventoryData.transaction_date = '<%= Date.today.to_s %>'">
                                                <div class="form-group">
                                                    <label>O.R Number</label>
                                                    <input type="text" class="form-control" ng-model="inventoryData.or_number" required>
@@ -123,6 +126,10 @@
                                                     <div class="col-md-4">
                                                         <label>Price</label>
                                                         <input type="number" ng-model="inventoryData.price" class="form-control" required>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label>Product Details</label>
+                                                        <textarea class="form-control" rows="5" ng-model="inventoryData.product_details"></textarea>
                                                     </div>
                                                </div>
                                                <div class="btn-add-new text-right margin-btm-md">

@@ -125,6 +125,7 @@ app
                   $scope.dataEdit = $scope.addOnStock[i];
               }
           });
+          console.log( $scope.addOnStock[i] );
           console.log( $scope.dataEdit );
        } );
 

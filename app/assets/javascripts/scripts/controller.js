@@ -206,8 +206,6 @@ app
           $( '.form-wrapper' ).css( 'display','none' );
           $( '.form-on-stock' ).show();
         };
-        $( '.total-wrapper' ).hide();
-        $( '.save-button' ).hide();
         totalAmount = 0;
       }
       $scope.showCategoryForm(false);

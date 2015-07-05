@@ -113,10 +113,11 @@ app
                      + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
-        $( '#basket-ordered-lists' ).append( htmlListDirPurchase );             
+        $( '#basket-ordered-lists' ).append( htmlListDirPurchase );  
+        getTotal( totalQuantityPrice , '+' );           
       }
 
-      
+
        // To Remove the Added Product
        $( 'body' ).delegate( '.btn-remove-stock-order' , 'click' , function(){
           var ID = $( this ).attr( 'id' );

@@ -21,7 +21,8 @@ app
     "$scope",
     "$http",
     "CarServer",
-    function controller($scope, $http, CarServer)
+    "$timeout",
+    function controller($scope, $http, "$timeout", CarServer)
     {
       console.log("inventoryAddCtrl");
       $scope.categoryList = {};
@@ -122,7 +123,9 @@ app
          $.each( $scope.addOnStock , function(i){
               console.log( $scope.addOnStock[i].cartID +' == '+ ID );
               if($scope.addOnStock[i].cartID == ID) {
-                  $scope.dataEdit = $scope.addOnStock[i];
+                  $timeout(function(){
+                    $scope.dataEdit = $scope.addOnStock[i];
+                  },10)
               }
               console.log( $scope.dataEdit );
           });

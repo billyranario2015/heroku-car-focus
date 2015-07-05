@@ -65,7 +65,7 @@ app
       // }
 
        $scope.addToBasketStock = function addToBasketStock(){
-        // console.log($scope.inventoryData);
+        console.log($scope.inventoryData);
         var today = new Date();
         var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
@@ -100,6 +100,7 @@ app
        
        }
 
+       // To Remove the Added Product
        $( 'body' ).delegate( '.btn-remove-stock-order' , 'click' , function(){
           var ID = $( this ).attr( 'id' );
           var pqv = $( this ).attr( 'priceQtyValue' );
@@ -115,6 +116,26 @@ app
           console.log($scope.addOnStock);
           $( '#' + ID ).parent().remove();
        } );
+
+
+      // Display the edited info to the modal
+      $( 'body' ).delegate( '.edit-selection' , 'click' , function(){
+          var ID = $( this ).attr( 'id' );
+          console.log( ($scope.addOnStock[i].cartID "===" ID )
+          $.each( $scope.addOnStock , function(i){
+              if($scope.addOnStock[i].cartID === ID) {
+                $timeout(function(){
+                  $scope.dataEdit.price           = $scope.addOnStock[i].price ;
+                  $scope.dataEdit.product_name    = $scope.addOnStock[i].product_name;
+                  $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;
+                  $scope.dataEdit.product_type    = $scope.addOnStock[i].product_type;
+                  $scope.dataEdit.quantity        = $scope.addOnStock[i].quantity;
+                },10);
+              }
+          });
+
+          console.log($scope.dataEdit);
+      } );
 
 
        function getTotal( orderValue , operation ) {

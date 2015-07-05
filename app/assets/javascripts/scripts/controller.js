@@ -125,10 +125,10 @@ app
                   setTimeout(function(){
                     $scope.dataEdit = $scope.addOnStock[i];
                   },10)
+                console.log( $scope.dataEdit ); 
+                console.log( $scope.addOnStock[i].product_name );
               }
-              console.log( $scope.dataEdit );
           });
-          console.log( $scope.addOnStock );
        } );
 
        function getTotal( orderValue , operation ) {

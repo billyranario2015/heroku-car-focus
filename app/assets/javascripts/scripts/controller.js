@@ -115,7 +115,7 @@ app
                      + '</li>';
         $( '#basket-ordered-lists' ).append( htmlListDirPurchase );  
         getTotal( totalQuantityPrice , '+' );
-  
+
         $( '.total-wrapper' ).show();
         $( '.save-button' ).show();     
       }
@@ -204,6 +204,7 @@ app
         };
         $( '.total-wrapper' ).hide();
         $( '.save-button' ).hide();
+        totalAmount = 0;
       }
       $scope.showCategoryForm(false);
 

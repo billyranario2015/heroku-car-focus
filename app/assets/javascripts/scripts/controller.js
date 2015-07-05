@@ -22,7 +22,7 @@ app
     "$http",
     "CarServer",
     "$timeout",
-    function controller($scope, $http, "$timeout", CarServer)
+    function controller($scope, $http, $timeout, CarServer)
     {
       console.log("inventoryAddCtrl");
       $scope.categoryList = {};

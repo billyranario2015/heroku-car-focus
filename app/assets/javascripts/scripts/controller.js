@@ -119,9 +119,9 @@ app
 
        $( 'body' ).delegate( '.edit-selection' , 'click' , function(){
         var ID = $( this ).attr( 'id' );
-        console.log( ID );
          $.each( $scope.addOnStock , function(i){
               if($scope.addOnStock[i].cartID === ID) {
+                  console.log( $scope.dataEdit );
                   $scope.dataEdit.price           = $scope.addOnStock[i].price ;
                   $scope.dataEdit.product_name    = $scope.addOnStock[i].product_name;
                   $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;

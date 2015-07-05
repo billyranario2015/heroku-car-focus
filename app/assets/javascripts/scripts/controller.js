@@ -123,7 +123,11 @@ app
               console.log( $scope.addOnStock[i].cartID +' == '+ ID );
               if($scope.addOnStock[i].cartID == ID) {
                   setTimeout(function(){
-                    $scope.dataEdit = $scope.addOnStock[i];
+                    $scope.dataEdit.price = $scope.addOnStock[i].price;
+                    $scope.dataEdit.product_name = $scope.addOnStock[i].product_name;
+                    $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;
+                    $scope.dataEdit.product_type = $scope.addOnStock[i].product_type;
+                    $scope.dataEdit.quantity = $scope.addOnStock[i].quantity;
                   },10)
                 console.log( $scope.dataEdit ); 
                 console.log( $scope.addOnStock[i].product_name );

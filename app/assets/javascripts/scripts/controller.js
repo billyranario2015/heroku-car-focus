@@ -119,6 +119,7 @@ app
 
        $( 'body' ).delegate( '.edit-selection' , 'click' , function(){
         var ID = $( this ).attr( 'id' );
+        console.log( ID );
          $.each( $scope.addOnStock , function(i){
               if($scope.addOnStock[i].cartID === ID) {
                   $scope.dataEdit.price           = $scope.addOnStock[i].price ;

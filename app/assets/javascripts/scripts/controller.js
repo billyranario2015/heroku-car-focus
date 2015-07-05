@@ -137,6 +137,9 @@ app
        // Make all Changes for ordered items 
        $scope.updateOrderedProduct = function updateOrderedProduct() {
           console.log( $scope.dataEdit );
+          $.each( $scope.addOnStock , function(i){
+              $scope.addOnStock[i] = $scope.dataEdit;
+          });
        } 
 
        function getTotal( orderValue , operation ) {

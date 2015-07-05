@@ -21,8 +21,7 @@ app
     "$scope",
     "$http",
     "CarServer",
-    "$timeout"
-    function controller($scope, $http, $timeout, CarServer)
+    function controller($scope, $http, CarServer)
     {
       console.log("inventoryAddCtrl");
       $scope.categoryList = {};
@@ -31,8 +30,6 @@ app
       $scope.inventoryList = {};
       $scope.categoryShow = 'on-stock';
       $scope.total = {};
-      $scope.dataEdit = {};
-
       $scope.orderHolder = [];
       $scope.addOnStock = [];
 
@@ -66,76 +63,34 @@ app
       // }
 
        $scope.addToBasketStock = function addToBasketStock(){
-        // console.log($scope.inventoryData);
-        var today = new Date();
-        var randomID = Date.now() + '-' + Math.random().toString(36).slice(2);
+        console.log($scope.inventoryData);
+        var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
         var htmlList = '<li>'
                      + '<button priceQtyValue="'+totalQuantityPrice+'" id="' + randomID + '" class="btn btn-default btn-remove-stock-order" data-toggle="tooltip" data-placement="left" title="Click to Remove"><i class="fa fa-minus"></i></button>' 
-                     + '<label><a href="#" id="'+ randomID +'" data-toggle="modal" class="edit-selection" data-target="#modal-edit-selection" >'+ $scope.inventoryData.product_name +'</a></label>'
+                     + '<label><a href="#" data-toggle="modal" data-target="#modal-edit-selection">'+ $scope.inventoryData.product_name +'</a></label>'
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
         $( '.total-wrapper' ).show();
         $( '.save-button' ).show();
         $( '#basket-ordered-lists' ).append( htmlList );
+        $scope.inventoryData = "";
 
-        $scope.addOnStock.push({ 
-          'cartID' : randomID,
-          'category_id' : $scope.inventoryData.category_id ,
-          'transaction_date' : today.toISOString().substring(0, 10) ,
-          'price' : $scope.inventoryData.price ,
-          'product_name' : $scope.inventoryData.product_name ,
-          'product_details' : $scope.inventoryData.product_details ,
-          'product_type ' : $scope.inventoryData.product_type   ,
-          'quantity' : $scope.inventoryData.quantity ,
-        });
-
-        console.log($scope.addOnStock);
-
-        $scope.inventoryData.price = "";
-        $scope.inventoryData.product_name = "";
-        $scope.inventoryData.product_details = "";
-        $scope.inventoryData.product_type = "";
-        $scope.inventoryData.quantity = "";
+        
 
         getTotal( totalQuantityPrice , '+' );
        
        }
 
-      // To Remove the Added Product
        $( 'body' ).delegate( '.btn-remove-stock-order' , 'click' , function(){
           var ID = $( this ).attr( 'id' );
           var pqv = $( this ).attr( 'priceQtyValue' );
           var priceValue = parseFloat( pqv );
           getTotal( priceValue , '-' );
-
-          $.each( $scope.addOnStock , function(i){
-              if($scope.addOnStock[i].cartID === ID) {
-                  $scope.addOnStock.splice(i,1);
-                  return false;
-              }
-          });
-          console.log($scope.addOnStock);
           $( '#' + ID ).parent().remove();
        } );
 
-       // Display the edited info to the modal
-       $( 'body' ).delegate( '.edit-selection' , 'click' , function(){
-          var ID = $( this ).attr( 'id' );
-          $.each( $scope.addOnStock , function(i){
-              if($scope.addOnStock[i].cartID === ID) {
-                $scope.dataEdit.price           = $scope.addOnStock[i].price ;
-                $scope.dataEdit.product_name    = $scope.addOnStock[i].product_name;
-                $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;
-                $scope.dataEdit.product_type    = $scope.addOnStock[i].product_type;
-                $scope.dataEdit.quantity        = $scope.addOnStock[i].quantity;
-              }
-          });
 
-          console.log($scope.dataEdit);
-       } );
-
-       // Calculates the total amount to be payed
        function getTotal( orderValue , operation ) {
         var total = 0;
         if ( operation == '+' ) {

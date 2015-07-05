@@ -117,12 +117,6 @@ app
           $( '#' + ID ).parent().remove();
        } );
 
-      // Display the edited info to the modal
-       $( 'body' ).delegate( '.edit-selection' , 'click' , function(){
-          var ID = $( this ).attr( 'id' );
-          console.log( ($scope.addOnStock[i].cartID "===" ID )
-       } );
-
        function getTotal( orderValue , operation ) {
         var total = 0;
         if ( operation == '+' ) {

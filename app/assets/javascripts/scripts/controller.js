@@ -119,7 +119,15 @@ app
 
        $( 'body' ).delegate( '.edit-selection' , 'click' , function(){
         var ID = $( this ).attr( 'id' );
-        alert( ID );
+         $.each( $scope.addOnStock , function(i){
+              if($scope.addOnStock[i].cartID === ID) {
+                  $scope.dataEdit.price           = $scope.addOnStock[i].price ;
+                  $scope.dataEdit.product_name    = $scope.addOnStock[i].product_name;
+                  $scope.dataEdit.product_details = $scope.addOnStock[i].product_details;
+                  $scope.dataEdit.product_type    = $scope.addOnStock[i].product_type;
+                  $scope.dataEdit.quantity        = $scope.addOnStock[i].quantity;
+              }
+          });
        } );
 
        function getTotal( orderValue , operation ) {

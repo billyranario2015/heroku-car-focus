@@ -114,7 +114,10 @@ app
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
         $( '#basket-ordered-lists' ).append( htmlListDirPurchase );  
-        getTotal( totalQuantityPrice , '+' );           
+        getTotal( totalQuantityPrice , '+' );
+  
+        $( '.total-wrapper' ).show();
+        $( '.save-button' ).show();     
       }
 
 

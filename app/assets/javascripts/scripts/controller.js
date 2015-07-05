@@ -125,8 +125,8 @@ app
               if($scope.addOnStock[i].cartID == ID) {
                   $scope.dataEdit = $scope.addOnStock[i];
               }
-              console.log( $scope.addOnStock[i]['price'] );
-              console.log( $scope.addOnStock[i]['product_name'] );
+              console.log( $scope.addOnStock[i].price );
+              console.log( $scope.addOnStock[i].product_name );
               console.log( $scope.dataEdit );
           });
           console.log( $scope.addOnStock );

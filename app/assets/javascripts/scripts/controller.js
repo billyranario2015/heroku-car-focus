@@ -124,9 +124,9 @@ app
               if($scope.addOnStock[i].cartID == ID) {
                   $scope.dataEdit = $scope.addOnStock[i];
               }
+              console.log( $scope.addOnStock[i] );
+              console.log( $scope.dataEdit );
           });
-          console.log( $scope.addOnStock[i] );
-          console.log( $scope.dataEdit );
        } );
 
        function getTotal( orderValue , operation ) {

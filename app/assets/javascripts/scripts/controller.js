@@ -121,7 +121,7 @@ app
         var ID = $( this ).attr( 'id' );
          $.each( $scope.addOnStock , function(i){
               console.log( $scope.dataEdit );
-              console.log( $scope.addOnStock[i].cartID === ID );
+              console.log( $scope.addOnStock[i].cartID '===' ID );
               if($scope.addOnStock[i].cartID === ID) {
                   $scope.dataEdit.price           = $scope.addOnStock[i].price ;
                   $scope.dataEdit.product_name    = $scope.addOnStock[i].product_name;

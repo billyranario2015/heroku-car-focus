@@ -186,6 +186,8 @@ app
           $( '.form-wrapper' ).css( 'display','none' );
           $( '.form-on-stock' ).show();
         };
+        $( '.total-wrapper' ).hide();
+        $( '.save-button' ).hide();
       }
       $scope.showCategoryForm(false);
 
@@ -199,7 +201,6 @@ app
       }
       // get total
       $scope.getTotal = function getTotal(){
-        var total = 0;
         var total = 0;
         for(var i = 0; i < $scope.inventoryList.length; i++){
             var product = $scope.inventoryList[i];

@@ -81,12 +81,8 @@ app
 
         $scope.addOnStock.push({ 
           'cartID' : randomID,
-          'category_id' : $scope.inventoryData.category_id ,  
-<<<<<<< HEAD
+          'category_id' : $scope.inventoryData.category_id ,
           'transaction_date' : today.toISOString().substring(0, 10) ,
-=======
-          'transaction_date' : $scope.inventoryData.transaction_date ,
->>>>>>> parent of 2319fbd... dasd
           'price' : $scope.inventoryData.price ,
           'product_name' : $scope.inventoryData.product_name ,
           'product_details' : $scope.inventoryData.product_details ,

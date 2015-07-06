@@ -280,16 +280,16 @@ app
 
         for( x in $scope.addOnStock ) {
           console.log( $scope.addOnStock[x] );
-          $timeout( function() {
-            $scope.showLoadState = false;
-            $scope.hideLoadState = false;
-          },3000 );
           // CarServer.request( "post" , "/inventories/submit" , 
           //   function( response ) {
           //     $scope.showLoadState = false;
           //     $scope.hideLoadState = false;
           //   } , $scope.addOnStock[x] );
           
+          $timeout( function() {
+            $scope.showLoadState = false;
+            $scope.hideLoadState = false;
+          },3000 );
         }
       }
 

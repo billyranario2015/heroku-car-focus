@@ -32,6 +32,7 @@ app
       $scope.categoryShow = 'on-stock';
       $scope.total = {};
       $scope.dataEdit = {};
+      $scope.dataStored = {};
 
       $scope.orderHolder = [];
       $scope.addOnStock = [];

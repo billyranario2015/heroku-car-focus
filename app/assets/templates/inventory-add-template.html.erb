@@ -39,8 +39,8 @@
                                     <!-- form-on-stock -->
                                     <div class="col-md-12 form-wrapper form-on-stock">
                                         <div class="col-md-12 remove-side-padding">
-                                             <form class="overflow" ng-submit="addToBasketStock()">
-                                                <div class="row form-group" style="margin-bottom: 15px;overflow:hidden">
+                                             <form class="row overflow" ng-submit="addToBasketStock()">
+                                                <div class="form-group" style="margin-bottom: 15px;overflow:hidden">
                                                     <div class="col-md-12">
                                                         <input type="hidden" ng-model="inventoryData.category_id" ng-init="inventoryData.category_id = 1">
                                                         <input type="hidden" ng-model="inventoryData.transaction_date" ng-init="inventoryData.transaction_date = '<%= Date.today.to_s %>'">

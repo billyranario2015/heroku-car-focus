@@ -280,7 +280,7 @@ app
 
         for( x in $scope.addOnStock ) {
           console.log( $scope.addOnStock[x] );
-          $timeout( function() {
+          setTimeout( function() {
             $scope.showLoadState = false;
             $scope.hideLoadState = false;
           },3000 );

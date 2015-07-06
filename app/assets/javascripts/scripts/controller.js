@@ -15,6 +15,27 @@ app
     function controller($scope, $http, CarServer)
     {
       console.log("inventoryViewCtrl");
+      // get stocks
+      $scope.getInventoryStocks = function getInventoryStocks(){
+        CarServer.request("get",'/inventories/getInventoryStocks',
+          function(response){
+            console.log(response)
+            $scope.inventoryList = response;
+          });
+      }
+
+       // get total
+      $scope.getTotal = function getTotal(){
+        var total = 0;
+        var total = 0;
+        for(var i = 0; i < $scope.inventoryList.length; i++){
+            var product = $scope.inventoryList[i];
+            total += (product.price * product.quantity);
+        }
+        return total;
+      }
+
+       $scope.getInventoryStocks;
     }
   ])
   .controller('inventoryAddCtrl', [

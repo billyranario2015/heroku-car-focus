@@ -53,17 +53,6 @@ app
 
         });
       }
-      
-      // $scope.submitStock = function submitStock(){
-      //   console.log($scope.inventoryData);
-      //   CarServer.request("post", '/inventories/submitStock',
-      //     function(response){
-      //       console.log(response);
-      //       $scope.getInventories();
-      //     }, $scope.inventoryData);
-
-      //   $scope.inventoryData = "";
-      // }
 
       // Add On Stock to Basket 
        $scope.addToBasketStock = function addToBasketStock(){
@@ -205,7 +194,6 @@ app
       }
 
       // add inventory data
-
       $scope.showCategoryForm = function showCategoryForm( categoryType ) {
         
         if (categoryType.value == 'on-stock') {
@@ -234,6 +222,11 @@ app
       }
       $scope.showCategoryForm(false);
 
+      // Insert All Selected Products
+      $scope.storeSelectedData = function storeSelectedData() {
+        console.log( $scope.addOnStock );
+      }
+
       // get inventories
       $scope.getInventories = function getInventories(){
         var forTotal =  {}
@@ -242,6 +235,8 @@ app
             $scope.inventoryList = response;
           });
       }
+
+
       // get total
       $scope.getTotal = function getTotal(){
         var total = 0;

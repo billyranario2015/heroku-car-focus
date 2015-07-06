@@ -33,6 +33,7 @@ app
       $scope.total = {};
       $scope.dataEdit = {};
       $scope.dataStored = {};
+      $scope.showLoadState = false;
 
       $scope.orderHolder = [];
       $scope.addOnStock = [];
@@ -244,7 +245,7 @@ app
         };
         totalAmount = 0;
         $( '#basket-ordered-lists li' ).remove();
-        $scope.inventoryData = [];
+        $scope.inventoryData = {};
         $scope.addOnStock = [];
         $( '#totalBasketPrice' ).text( '0.00' );
       }
@@ -253,8 +254,21 @@ app
       // Insert All Selected Products
       $scope.storeSelectedData = function storeSelectedData() {
         console.log( $scope.addOnStock );
+        $scope.showLoadState = true;
+        $scope.hideLoadState = true;
+
         for( x in $scope.addOnStock ) {
           console.log( $scope.addOnStock[x] );
+          $timeout( function() {
+            $scope.showLoadState = false;
+            $scope.hideLoadState = false;
+          } );
+          // CarServer.request( "post" , "/inventories/submit" , 
+          //   function( response ) {
+          //     $scope.showLoadState = false;
+          //     $scope.hideLoadState = false;
+          //   } , $scope.addOnStock[x] );
+          
         }
       }
 

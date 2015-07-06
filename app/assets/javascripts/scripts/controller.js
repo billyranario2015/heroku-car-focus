@@ -70,14 +70,14 @@ app
         $( '#basket-ordered-lists' ).append( htmlList );
 
         $scope.addOnStock.push({ 
-          'cartID' : randomID,
-          'category_id' : $scope.inventoryData.category_id ,  
-          'transaction_date' : today.toISOString().substring(0, 10) ,
-          'price' : $scope.inventoryData.price ,
-          'product_name' : $scope.inventoryData.product_name ,
-          'product_details' : $scope.inventoryData.product_details ,
-          'product_type ' : $scope.inventoryData.product_type   ,
-          'quantity' : $scope.inventoryData.quantity ,
+          'cartID'            : randomID,
+          'category_id'       : 1 ,  
+          'transaction_date'  : today.toISOString().substring(0, 10) ,
+          'price'             : $scope.inventoryData.price ,
+          'product_name'      : $scope.inventoryData.product_name ,
+          'product_details'   : $scope.inventoryData.product_details ,
+          'product_type '     : $scope.inventoryData.product_type   ,
+          'quantity'          : $scope.inventoryData.quantity
         });
 
         $scope.inventoryData.price = "";
@@ -104,7 +104,20 @@ app
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
         $( '#basket-ordered-lists' ).append( htmlList );  
-        getTotal( totalQuantityPrice , '+' );
+        
+        $scope.addOnStock.push({ 
+          'cartID'           : randomID,
+          'category_id'      : 2,  
+          'transaction_date' : today.toISOString().substring(0, 10) ,
+          'or_number'        : $scope.inventoryData.or_number ,
+          'incharge'         : $scope.inventoryData.incharge ,
+          'cash_on_hand'     : $scope.inventoryData.cash_on_hand ,
+          'store '           : $scope.inventoryData.store,
+          'product_name'     : $scope.inventoryData.product_name , 
+          'quantity'         : $scope.inventoryData.quantity , 
+          'price '           : $scope.inventoryData.price,
+          'details '         : $scope.inventoryData.details
+        } );
 
         $scope.inventoryData.or_number = "";
         $scope.inventoryData.incharge = "";
@@ -114,6 +127,8 @@ app
         $scope.inventoryData.product_details = "";
         $scope.inventoryData.price = "";
         $scope.inventoryData.quantity = "";  
+        
+        getTotal( totalQuantityPrice , '+' );
       }
 
       // Add Product Order to Basket 
@@ -129,13 +144,27 @@ app
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
         $( '#basket-ordered-lists' ).append( htmlList );  
-        getTotal( totalQuantityPrice , '+' );
         
+        $scope.addOnStock.push({ 
+          'cartID'            : randomID,
+          'category_id'       : 3,
+          'transaction_date'  : today.toISOString().substring(0, 10) ,
+          'manufacturer'      : $scope.inventoryData.manufacturer ,
+          'address'           : $scope.inventoryData.address ,
+          'product_name'      : $scope.inventoryData.product_name ,
+          'quantity '         : $scope.inventoryData.quantity   ,
+          'price'             : $scope.inventoryData.price ,
+          'product_type'      : $scope.inventoryData.product_type ,
+          'product_details'   : $scope.inventoryData.product_details
+        });
+
         $scope.inventoryData.product_name = "";
         $scope.inventoryData.quantity = "";
         $scope.inventoryData.price = "";
         $scope.inventoryData.product_type = "";
         $scope.inventoryData.product_details = "";
+        
+        getTotal( totalQuantityPrice , '+' );
       }
 
 

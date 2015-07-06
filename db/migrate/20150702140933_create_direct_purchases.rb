@@ -5,7 +5,7 @@ class CreateDirectPurchases < ActiveRecord::Migration
       t.string :or_no
       t.string :in_charge
       t.integer :cash_on_hand
-      t.integer :product_name
+      t.string :product_name
 
       t.timestamps null: false
     end

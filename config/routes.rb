@@ -15,6 +15,13 @@ Rails.application.routes.draw do
       # get '*path' => 'application#index'
       get '/user/settings' => 'user#settings', as: 'user_settings'
 
+      # for product order routes
+      match '/inventories/getProductOrderList' => 'inventories#getProductOrderList', via: [:get, :options]
+      match '/inventories/submitProductOrder' => 'inventories#submitStock', via: [:get, :options]
+      match '/inventories/:id/deleteProductOrder' => 'inventories#deleteProductOrder', via: [:get, :options]
+      match '/inventories/:id/updateProductOrder' => 'inventories#updateProductOrder', via: [:get, :options]
+      # end of product routes
+      
       # for direct purchase routes
       match '/inventories/getManufacturerList' => 'inventories#getManufacturerList', via: [:get, :options]
       match '/inventories/submitDirectPurchase' => 'inventories#submitDirectPurchase', via: [:post, :options]

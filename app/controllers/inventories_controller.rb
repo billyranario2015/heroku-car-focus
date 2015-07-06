@@ -123,6 +123,51 @@ class InventoriesController < ApplicationController
     end
   end
   # end of direct purchase functions
+
+  # start of product order functions
+
+  def getProductOrderList
+    product = ProductOrder.all.order("created_at asc")
+    render json: purchases, status: :ok
+  end
+
+  def submitProductOrder
+
+    inventory = Inventory.last
+    product = ProductOrder.create(category_id: params[:category_id], manufacturer_id: params[:manufacturer_id], product_type: params[:product_type], inventory_id: inventory.id, product_name: params[:product_name], quantity: params[:quantity], price: params[:quantity])
+  
+    if product.save
+      logs = Log.create(user_id: current_user.id, action: "added an item from Inventory(Product Order).")
+      logs.save
+      render :json => { :status => :ok, :message => "Success" }
+    else
+      render :json => { :status => :error, :message => "Error!" }
+    end
+  end
+
+  def updateProductOrder
+    product = ProductOrder.find_by_id(params[:id])
+
+    if product.update(category_id: params[:category_id], manufacturer_id: params[:manufacturer_id], product_type: params[:product_type], inventory_id: inventory.id, product_name: params[:product_name], quantity: params[:quantity], price: params[:quantity])
+      logs = Log.create(user_id: current_user.id, action: "updated an item from Inventory(Product Order).")
+      logs.save
+      render :json => { :status => :ok, :message => "Success" }
+    else
+      render :json => { :status => :error, :message => "Error!" }
+    end
+  end
+
+  def deleteProductOrder
+    product = ProductOrder.find(params[:id])
+    if product.destroy
+      logs = Log.create(user_id: current_user.id, action: "deleted an item from Inventory(Product Order).")
+      logs.save
+      render :json => { :status => :ok, :message => "Success" }
+    else
+      render :json => { :status => :error, :message => "Error!" }
+    end
+  end
+  # end of product order functions
   private
 
   def inventory_params

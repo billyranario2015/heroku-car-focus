@@ -225,6 +225,9 @@ app
       // Insert All Selected Products
       $scope.storeSelectedData = function storeSelectedData() {
         console.log( $scope.addOnStock );
+        for( x in $scope.addOnStock ) {
+          console.log( $scope.addOnStock[x] );
+        }
       }
 
       // get inventories

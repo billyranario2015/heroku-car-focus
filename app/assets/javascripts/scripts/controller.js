@@ -244,8 +244,8 @@ app
         };
         totalAmount = 0;
         $( '#basket-ordered-lists li' ).remove();
-        $scope.inventoryData = "";
-        $scope.addOnStock = "";
+        $scope.inventoryData = [];
+        $scope.addOnStock = [];
         $( '#totalBasketPrice' ).text( '0.00' );
       }
       $scope.showCategoryForm(false);

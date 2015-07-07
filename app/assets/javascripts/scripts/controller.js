@@ -55,7 +55,9 @@ app
       $scope.dataEdit = {};
       $scope.dataStored = {};
       $scope.showLoadState = false;
-
+      $scope.alertmsg = false;
+      $scope.errormsg = false;
+      $scope.msg = "";
       $scope.orderHolder = [];
       $scope.addOnStock = [];
 
@@ -131,8 +133,8 @@ app
           'cartID'           : randomID,
           'category_id'      : 2,  
           'transaction_date' : today.toISOString().substring(0, 10) ,
-          'or_number'        : $scope.inventoryData.or_number ,
-          'incharge'         : $scope.inventoryData.incharge ,
+          'or_number'        : $scope.inventoryData.or_no ,
+          'incharge'         : $scope.inventoryData.in_charge ,
           'cash_on_hand'     : $scope.inventoryData.cash_on_hand ,
           'store '           : $scope.inventoryData.store,
           'product_name'     : $scope.inventoryData.product_name , 
@@ -141,8 +143,8 @@ app
           'details '         : $scope.inventoryData.details
         } );
 
-        $scope.inventoryData.or_number = "";
-        $scope.inventoryData.incharge = "";
+        $scope.inventoryData.or_no = "";
+        $scope.inventoryData.in_charge = "";
         $scope.inventoryData.cash_on_hand = "";
         $scope.inventoryData.store = "";
         $scope.inventoryData.product_name = "";
@@ -265,32 +267,109 @@ app
           $( '.form-on-stock' ).show();
         };
         totalAmount = 0;
+        resetData();
+      }
+      $scope.showCategoryForm(false);
+
+      function resetData() {
         $( '#basket-ordered-lists li' ).remove();
         $scope.inventoryData = {};
         $scope.addOnStock = [];
         $( '#totalBasketPrice' ).text( '0.00' );
       }
-      $scope.showCategoryForm(false);
+
+      // Create Inventory  -- call
+      $scope.createInventory = function createInventory(){
+
+        CarServer.request("post", '/inventories/createInventory',
+          function(response){
+            console.log(console);
+          }, $scope.addOnStock);
+      }
 
       // Insert All Selected Products
       $scope.storeSelectedData = function storeSelectedData() {
-        console.log( $scope.addOnStock );
-        $scope.showLoadState = true;
-        $scope.hideLoadState = true;
-
+        $scope.createInventory();
         for( x in $scope.addOnStock ) {
-          console.log( $scope.addOnStock[x] );
-          // CarServer.request( "post" , "/inventories/submit" , 
-          //   function( response ) {
-          //     $scope.showLoadState = false;
-          //     $scope.hideLoadState = false;
-          //   } , $scope.addOnStock[x] );
-          
-          $timeout( function() {
-            $scope.showLoadState = false;
-            $scope.hideLoadState = false;
-          },3000 );
+          $scope.showLoadState = true;
+          $scope.hideLoadState = true;
+
+          if ( $scope.addOnStock.length > 0 ) {
+            switch( $scope.addOnStock[x].category_id ) {
+              case 1: // Insert On Stock Products
+              console.log($scope.addOnStock[x]);
+                CarServer.request( "post" , "/inventories/submitStock" , 
+                  function( response ) {
+                    console.log( 'success on-stock' )
+                    $scope.showLoadState = false;
+                    $scope.hideLoadState = false;
+                    $scope.alertmsg = true;
+                    $scope.msg = "Successfully added on inventory.";
+                    $timeout( function(){
+                      $scope.alertmsg = false;
+                    }, 3000 );
+                    $scope.alertmsg = false;
+                } , $scope.addOnStock[x] );
+                    // resetData();
+                break;
+
+              case 2: // Insert Direct Purchase Products
+                CarServer.request( "post" , "/inventories/submitDirectPurchase" , 
+                  function( response ) {
+                    console.log( 'success direct-purchase' );
+                    $scope.showLoadState = false;
+                    $scope.hideLoadState = false;
+                    $scope.alertmsg = true;
+                    $scope.msg = "Successfully added on inventory.";
+                      $scope.alertmsg = false;
+                    $timeout( function(){
+                    }, 3000 );
+                    $scope.alertmsg = false;
+                } , $scope.addOnStock[x] );
+                    resetData();
+                break;
+
+              case 3: // Insert Product Orders
+              console.log($scope.addOnStock[x]);
+                CarServer.request( "post" , "/inventories/submitProductOrder" , 
+                  function( response ) {
+                    console.log( 'success product-order' );
+                    $scope.showLoadState = false;
+                    $scope.hideLoadState = false;
+                    $scope.alertmsg = true;
+                    $scope.msg = "Successfully added on inventory.";
+                    $timeout( function(){
+                      $scope.alertmsg = false;
+                    }, 3000 );
+                    $scope.alertmsg = false;
+                } , $scope.addOnStock[x] );
+                    resetData();
+                break;
+
+              default:
+                console.log( 'Error daw' );
+                break;
+            }
+          }
         }
+
+        if ( $scope.addOnStock.length < 1 ) {
+            $scope.errormsg = true;
+            $scope.msg = "Empty/Invalid entry.";
+            $timeout( function() {
+              $scope.errormsg = false;
+            },3000 );
+        };
+
+
+
+
+
+
+          // $timeout( function() {
+          //   $scope.showLoadState = false;
+          //   $scope.hideLoadState = false;
+          // },3000 );
       }
 
       // get inventories
@@ -323,7 +402,7 @@ app
 
       // load functions
       $scope.getInventoryStocks();
-      $scope.getInventories();
+      // $scope.getInventories();
       $scope.categories();
     }
   ])

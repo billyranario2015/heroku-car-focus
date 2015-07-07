@@ -15,27 +15,28 @@ Rails.application.routes.draw do
       # get '*path' => 'application#index'
       get '/user/settings' => 'user#settings', as: 'user_settings'
 
-      # for product order routes
-      match '/inventories/getProductOrderList' => 'inventories#getProductOrderList', via: [:get, :options]
-      match '/inventories/submitProductOrder' => 'inventories#submitStock', via: [:get, :options]
-      match '/inventories/:id/deleteProductOrder' => 'inventories#deleteProductOrder', via: [:get, :options]
-      match '/inventories/:id/updateProductOrder' => 'inventories#updateProductOrder', via: [:get, :options]
-      # end of product routes
-      
-      # for direct purchase routes
-      match '/inventories/getManufacturerList' => 'inventories#getManufacturerList', via: [:get, :options]
-      match '/inventories/submitDirectPurchase' => 'inventories#submitDirectPurchase', via: [:post, :options]
-      match '/inventories/getDirectPurchases' => 'inventories#getDirectPurchases', via: [:get, :options]
-      match '/inventories/:id/deleteDirectPurchase' => 'inventories#deleteDirectPurchase', via: [:get, :options]
-      match '/inventories/:id/updateDirectPurchase' => 'inventories#updateDirectPurchase', via: [:post, :options]
-      # end of product routes
+      post '/inventories/createInventory' => 'inventories#createInventory'
 
-      # for on stock routes
-      match '/inventories/submitStock' => 'inventories#submitStock', via: [:post, :options]
-      match '/inventories/createInventory' => 'inventories#createInventory', via: [:post, :options]
-      match 'inventories/getInventoryStocks' => 'inventories#getInventoryStocks', via: [:get, :options]
-      match 'inventories/:id' => 'inventories#deleteInventoryStock', via: [:get, :options]
-      match 'inventories/:id' => 'inventories#updateInventoryStocks', via: [:post, :options]
+      # submit routes
+      post '/inventories/submitDirectPurchase' => 'inventories#submitDirectPurchase'
+      post '/inventories/submitStock' => 'inventories#submitStock'
+      post '/inventories/submitProductOrder' => 'inventories#submitProductOrder'
+
+      # get list
+      get 'inventories/getInventoryStocks' => 'inventories#getInventoryStocks'
+      get '/inventories/getProductOrderList' => 'inventories#getProductOrderList'
+      get '/inventories/getManufacturerList' => 'inventories#getManufacturerList'
+      get '/inventories/getDirectPurchases' => 'inventories#getDirectPurchases'
+
+      #update routes
+      post '/inventories/:id/updateProductOrder' => 'inventories#updateProductOrder'
+      post '/inventories/:id/updateDirectPurchase' => 'inventories#updateDirectPurchase'
+
+      # delete routes
+      get '/inventories/:id/deleteProductOrder' => 'inventories#deleteProductOrder'
+      get '/inventories/:id/deleteDirectPurchase' => 'inventories#deleteDirectPurchase'  
+      get 'inventories/:id' => 'inventories#deleteInventoryStock'
+      get 'inventories/:id' => 'inventories#updateInventoryStocks'
       # end of on stock routes
 
     end

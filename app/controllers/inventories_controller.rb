@@ -16,7 +16,7 @@ class InventoriesController < ApplicationController
   def submitStock
     inventory_data = Inventory.last
     
-    onstock = OnStock.create(product_type: params[:product_type], category_id: inventory_data.category_id, inventory_id: inventory_data.id, product_name: params[:product_name], product_details: params[:product_details], quantity: params[:quantity], price: params[:price])
+    onstock = OnStock.create(category_id: params[:category_id], inventory_id: inventory_data.id, product_name: params[:product_name], product_type: params[:product_type], product_details: params[:product_details], quantity: params[:quantity], price: params[:price])
     onstock.save
 
     stock_last = OnStock.last
@@ -35,7 +35,7 @@ class InventoriesController < ApplicationController
 
   #create Inventory
   def createInventory
-     inventory = Inventory.create(inventory_params)
+     inventory = Inventory.create(category_id: params[:category_id], transaction_date: params[:transaction_date], user_id: current_user.id)
      if inventory.save
         render :json => { :status => :ok, :message => "Success" }
      else

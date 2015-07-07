@@ -59,7 +59,7 @@
                                    <%= image_tag "user.jpg", class: "img-circle float" %>
                                </div>
                                <div class="profile-name text-center">
-                                   <h4>Hello, <span class="text-primary"><%= current_user.user_info.firstname %></span></h4>
+                                   <h4>Hello, <span class="text-primary"><%= current_user.user_info.firstname.titleize %></span></h4>
                                </div>
                            </div>
                         </li>
@@ -69,6 +69,9 @@
                           <%= render 'expenses' %>
                           <%= render 'estimations' %>
                           <%= render 'summary' %>
+
+                        <% elsif current_user.user_type == 'regular' %>
+                          <%= render 'estimations' %>
                         <% end %>
                     </ul>
                 </div>
@@ -81,6 +84,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
+                <% if current_user.user_type == 'admin' %>
                    <section template="dashboard" template-name="dashboard-template.html" class="hidden" template-ctrl="dashBoardCtrl"></section>
                    <section template="inventory-view" template-name="inventory-view-template.html" class="hidden" template-ctrl="inventoryViewCtrl"></section>
                    <section template="inventory-add" template-name="inventory-add-template.html" template-ctrl="inventoryAddCtrl"></section>
@@ -89,6 +93,11 @@
                    <section template="estimation-add" template-name="estimation-add-template.html" class="hidden" template-ctrl="esitmationAddCtrl"></section>
                    <section template="estimation-view" template-name="estimation-view-template.html" class="hidden" template-ctrl="estimationViewCtrl"></section>
                    <section template="summary-view" template-name="summary-view-template.html" class="hidden" template-ctrl="summaryViewCtrl"></section>
+
+                <% elsif %>
+                  <section template="estimation-add" template-name="estimation-add-template.html" template-ctrl="esitmationAddCtrl"></section>
+                   <section template="estimation-view" template-name="estimation-view-template.html" class="hidden" template-ctrl="estimationViewCtrl"></section>
+                <% end %>
                 </div>
                 <!-- /.row -->
             </div>

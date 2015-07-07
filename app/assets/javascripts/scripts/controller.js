@@ -136,7 +136,7 @@ app
           'or_number'        : $scope.inventoryData.or_no ,
           'incharge'         : $scope.inventoryData.in_charge ,
           'cash_on_hand'     : $scope.inventoryData.cash_on_hand ,
-          'store '           : $scope.inventoryData.store,
+          'store_name'           : $scope.inventoryData.store_name,
           'product_name'     : $scope.inventoryData.product_name , 
           'quantity'         : $scope.inventoryData.quantity , 
           'price '           : $scope.inventoryData.price,
@@ -146,7 +146,7 @@ app
         $scope.inventoryData.or_no = "";
         $scope.inventoryData.in_charge = "";
         $scope.inventoryData.cash_on_hand = "";
-        $scope.inventoryData.store = "";
+        $scope.inventoryData.store_name = "";
         $scope.inventoryData.product_name = "";
         $scope.inventoryData.product_details = "";
         $scope.inventoryData.price = "";

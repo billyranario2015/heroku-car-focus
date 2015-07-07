@@ -83,7 +83,7 @@ class InventoriesController < ApplicationController
 
   def submitDirectPurchase
     inventory = Inventory.last
-    direcpurchase = DirectPurchase.create(category_id: params[:category_id], manufacturer_id: params[:manufacturer_id], car_brand: params[:car_brand], car_model: params[:car_model], inventory_id: inventory.id, or_no: params[:or_no], in_charge: params[:in_charge], cash_on_hand: params[:cash_on_hand], product_name: params[:product_name], quantity: params[:quantity], price: params[:price])
+    direcpurchase = DirectPurchase.create(category_id: params[:category_id], store_name: params[:store_name], car_brand: params[:car_brand], car_model: params[:car_model], inventory_id: inventory.id, or_no: params[:or_no], in_charge: params[:in_charge], cash_on_hand: params[:cash_on_hand], product_name: params[:product_name], quantity: params[:quantity], price: params[:price])
     
     if direcpurchase.save
 

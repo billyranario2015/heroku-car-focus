@@ -4,8 +4,8 @@ class AddColumnToProductOrders < ActiveRecord::Migration
     add_column :product_orders, :person_incharge, :string
     add_column :product_orders, :cash_onhand, :integer
     add_column :product_orders, :product_name, :string
-    add_column :product_orders, :quantity, :string
-    add_column :product_orders, :price, :string
+    add_column :product_orders, :quantity, :integer
+    add_column :product_orders, :price, :integer
     add_column :product_orders, :car_model, :string
   end
 end

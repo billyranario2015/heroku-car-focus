@@ -23,20 +23,20 @@ Rails.application.routes.draw do
       post '/inventories/submitProductOrder' => 'inventories#submitProductOrder'
 
       # get list
-      get 'inventories/getInventoryStocks' => 'inventories#getInventoryStocks'
+      get '/inventories/getInventoryStocks' => 'inventories#getInventoryStocks'
       get '/inventories/getProductOrderList' => 'inventories#getProductOrderList'
       get '/inventories/getManufacturerList' => 'inventories#getManufacturerList'
       get '/inventories/getDirectPurchases' => 'inventories#getDirectPurchases'
 
       #update routes
+      post '/inventories/:id/updateInventoryStocks' => 'inventories#updateInventoryStocks'
       post '/inventories/:id/updateProductOrder' => 'inventories#updateProductOrder'
       post '/inventories/:id/updateDirectPurchase' => 'inventories#updateDirectPurchase'
 
       # delete routes
       get '/inventories/:id/deleteProductOrder' => 'inventories#deleteProductOrder'
       get '/inventories/:id/deleteDirectPurchase' => 'inventories#deleteDirectPurchase'  
-      get 'inventories/:id' => 'inventories#deleteInventoryStock'
-      get 'inventories/:id' => 'inventories#updateInventoryStocks'
+      get 'inventories/:id/deleteInventoryStock' => 'inventories#deleteInventoryStock'
       # end of on stock routes
 
     end

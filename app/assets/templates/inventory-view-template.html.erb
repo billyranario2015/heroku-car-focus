@@ -1,9 +1,12 @@
+<div class="main-wrapper col-lg-12">
+<h1 class="page-header">Inventory</h1>
+<div class="row">
 <div class="col-md-12">
     <div class="content">
         <!-- Nav tabs -->
         <ul class="nav nav-pills nav-justified inventory-category" role="tablist">
-            <li role="presentation"><a href="#on-stock" aria-controls="on-stock" role="tab" data-toggle="tab">On Stock</a></li>
-            <li role="presentation" class="active"><a href="#direct-purchase" aria-controls="direct-purchase" role="tab" data-toggle="tab">Direct Purchase</a></li>
+            <li role="presentation" class="active"><a href="#on-stock" aria-controls="on-stock" role="tab" data-toggle="tab">On Stock</a></li>
+            <li role="presentation"><a href="#direct-purchase" aria-controls="direct-purchase" role="tab" data-toggle="tab">Direct Purchase</a></li>
             <li role="presentation"><a href="#product-order" aria-controls="product-order" role="tab" data-toggle="tab">Product Order</a></li>
         </ul>
         <!-- Search -->
@@ -43,119 +46,38 @@
         <!-- end: Search -->
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane" id="on-stock">
+            <div role="tabpanel" class="tab-pane active" id="on-stock">
                 <div class="tab-container">
-                    <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-on-stock" role="grid" aria-describedby="dataTables-on-stock_info">
+                    <table datatable="ng" class="row-border table table-striped table-bordered table-hover" >
                         <thead>
-                            <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="dataTables-on-stock" rowspan="1" colspan="1" aria-sort="ascending" style="width: 170px;">Product Name</th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTables-on-stock" rowspan="1" colspan="1" style="width: 85px;">Quantity</th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTables-on-stock" rowspan="1" colspan="1" style="width: 110px;">Price</th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTables-on-stock" rowspan="1" colspan="1" style="width: 108px;">Date</th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTables-on-stock" rowspan="1" colspan="1" style="width: 108px;">Total</th>
+                            <tr ng-show="tableHeadings1">
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="gradeA odd" role="row">
-                                <td class="sorting_1">
-                                    <a href="#" data-toggle="modal" data-target="#productModalInfo">
-                                        Product 1
-                                    </a>
+                            <tr class="gradeA odd" role="row" ng-repeat="list in onStockList">
+                                <td>
+                                    <a href="#" data-toggle="modal" ng-click="displayProductInfo(list,'viewOnStock')" data-target="#productModalInfo" ng-bind="list.product_name"></a>
                                 </td>
-                                <td>2</td>
-                                <td>Php 12.00</td>
-                                <td class="center">June 20, 2015</td>
-                                <td class="center">Php 24.00</td>
+                                <td ng-bind="list.quantity"></td>
+                                <td>P <span ng-bind="list.price"></span></td>
+                                <td>{{list.created_at| cmdate:'yyyy-MM-dd'}}</td>
+                                <td ng-init="list.total=list.quantity*list.price">P {{list.total}}</td>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="displayProductInfo( list, 'edit' )"><span class="label label-primary">Edit</span></a>
+                                    <a href ng-click="removeProduct(list)"><span class="label label-danger">Remove</span></a>
+                                </td>
                              </tr>
-
-                             <tr class="gradeA even" role="row">
-                                <td class="sorting_1">
-                                    <a href="#" data-toggle="modal" data-target="#productModalInfo">
-                                        Product 2
-                                    </a>
-                                </td>
-                                <td>12</td>
-                                <td>Php 43.00</td>
-                                <td class="center">June 12, 2015</td>
-                                <td class="center">Php 516.00</td>
-                            </tr>
-
-                             <tr class="gradeA odd" role="row">
-                                <td class="sorting_1">
-                                    <a href="#" data-toggle="modal" data-target="#productModalInfo">
-                                        Product 1
-                                    </a>
-                                </td>
-                                <td>2</td>
-                                <td>Php 12.00</td>
-                                <td class="center">June 20, 2015</td>
-                                <td class="center">Php 24.00</td>
-                             </tr>
-
-                             <tr class="gradeA even" role="row">
-                                <td class="sorting_1">
-                                    <a href="#" data-toggle="modal" data-target="#productModalInfo">
-                                        Product 2
-                                    </a>
-                                </td>
-                                <td>12</td>
-                                <td>Php 43.00</td>
-                                <td class="center">June 12, 2015</td>
-                                <td class="center">Php 516.00</td>
-                            </tr>
-
-                             <tr class="gradeA odd" role="row">
-                                <td class="sorting_1">
-                                    <a href="#" data-toggle="modal" data-target="#productModalInfo">
-                                        Product 1
-                                    </a>
-                                </td>
-                                <td>2</td>
-                                <td>Php 12.00</td>
-                                <td class="center">June 20, 2015</td>
-                                <td class="center">Php 24.00</td>
-                             </tr>
-
-                             <tr class="gradeA even" role="row">
-                                <td class="sorting_1">
-                                    <a href="#" data-toggle="modal" data-target="#productModalInfo">
-                                        Product 2
-                                    </a>
-                                </td>
-                                <td>12</td>
-                                <td>Php 43.00</td>
-                                <td class="center">June 12, 2015</td>
-                                <td class="center">Php 516.00</td>
-                            </tr>
-
-                             <tr class="gradeA odd" role="row">
-                                <td class="sorting_1">
-                                    <a href="#" data-toggle="modal" data-target="#productModalInfo">
-                                        Product 1
-                                    </a>
-                                </td>
-                                <td>2</td>
-                                <td>Php 12.00</td>
-                                <td class="center">June 20, 2015</td>
-                                <td class="center">Php 24.00</td>
-                             </tr>
-
-                             <tr class="gradeA even" role="row">
-                                <td class="sorting_1">
-                                    <a href="#" data-toggle="modal" data-target="#productModalInfo">
-                                        Product 2
-                                    </a>
-                                </td>
-                                <td>12</td>
-                                <td>Php 43.00</td>
-                                <td class="center">June 12, 2015</td>
-                                <td class="center">Php 516.00</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane active" id="direct-purchase">
+            <div role="tabpanel" class="tab-pane" id="direct-purchase">
                 <div class="tab-container">
                     <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-direct-purchase" role="grid" aria-describedby="dataTables-direct-purchase_info">
                         <thead>
@@ -558,4 +480,130 @@
 </div>
 </div>
 </div>
+
+
+
+<!-- View Modal for product info -->
+<div class="modal fade" id="productModalInfo" tabindex="-1" role="dialog" aria-labelledby="productModalInfoLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="productModalInfoLabel">Product Transaction Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 product-description">
+                        <table class="table table-hovered table-bordered">
+                            <tr>
+                                <th>Transaction ID:</th>
+                                <td ng-bind="displayModalInfo.inventory_id">201506201003</td>
+                            </tr>
+                            <tr>
+                                <th>Product Name:</th>
+                                <td ng-bind="displayModalInfo.product_name"></td>
+                            </tr>
+                            <tr>
+                                <th>Quantity:</th>
+                                <td ng-bind="displayModalInfo.quantity">2</td>
+                            </tr>
+                            <tr>
+                                <th>Price:</th>
+                                <td ng-bind="displayModalInfo.price">Php 12.00</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6 product-description">
+                        <table class="table table-hovered table-bordered">
+                            <tr ng-show="statusActive">
+                                <th>Store:</th>
+                                <td ng-bind="displayModalInfo.store">Kakings</td>
+                            </tr>
+                            <tr>
+                                <th>Date:</th>
+                                <td ng-bind="displayModalInfo.created_at">June 20, 2015 1:23 pm</td>
+                            </tr>
+                            <tr ng-show="statusActive">
+                                <th>Buyer:</th>
+                                <td ng-bind="displayModalInfo.">Ms. Jocelyn dela Cruz</td>
+                            </tr>
+                            <tr>
+                                <th>Total:</th>
+                                <td ng-init="displayModalInfo.total=displayModalInfo.quantity*displayModalInfo.price">P <span class="text-info">{{displayModalInfo.total}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-12 description">
+                        <label>Description</label>
+                        <p ng-bind="displayModalInfo.product_details" ></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: View Modal -->
+
+
+
+<!-- Edit Modal for product info -->
+<div class="modal fade bs-example-modal-lg" id="productModalInfoEdit" tabindex="-1" role="dialog" aria-labelledby="productModalInfoEdit">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="productModalInfoLabel">Product Transaction Detail</h4>
+            </div>
+            <form ng-submit="editProductInfo()">
+            <div class="modal-body">
+                <div class="row">
+                        <div class="col-md-6 product-description">
+                            <table class="table table-hovered table-bordered table-condensed">
+                                <tr>
+                                    <th>Transaction ID:</th>
+                                    <input type="hidden" ng-model="displModalInfo.category_id">
+                                    <td ng-bind="displayModalInfo.inventory_id"></td>
+                                </tr>
+                                <tr>
+                                    <th>Product Name:</th>
+                                    <td><input type="text" ng-model="displayModalInfo.product_name" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <th>Quantity:</th>
+                                    <td><input type="number" step="any" ng-model="displayModalInfo.quantity" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <th>Price:</th>
+                                    <td><input type="number" step="any" ng-model="displayModalInfo.price" class="form-control"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6 product-description">
+                            <table class="table table-hovered table-bordered">
+                                <tr>
+                                    <th>Date:</th>
+                                    <td>{{displayModalInfo.created_at| cmdate:'yyyy-MM-dd'}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-12 description">
+                            <label>Description</label>
+                            <textarea class="form-control" ng-model="displayModalInfo.product_details" rows="5"></textarea>
+                        </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end: View Modal -->
+
 <!-- /.col-lg-12 -->

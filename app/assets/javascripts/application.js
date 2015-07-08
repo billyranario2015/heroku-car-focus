@@ -18,9 +18,11 @@
 //= require dataTables.bootstrap.min
 //= require sb-admin-2
 //= require scripts/angular
+//= require angular-datatables.min
 //= require angular-rails-templates
 //= require scripts/app
 //= require scripts/factory
 //= require scripts/directive
 //= require scripts/controller
+//= require materialize.min
 //= require_tree ../templates

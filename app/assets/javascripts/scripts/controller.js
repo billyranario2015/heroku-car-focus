@@ -12,17 +12,70 @@ app
     "$scope",
     "$http",
     "CarServer",
-    function controller($scope, $http, CarServer)
+    "$timeout",
+    function controller($scope, $http, CarServer, $timeout)
     {
       console.log("inventoryViewCtrl");
-      // get stocks
-      $scope.getInventoryStocks = function getInventoryStocks(){
-        CarServer.request("get",'/inventories/getInventoryStocks',
-          function(response){
-            console.log(response)
-            $scope.inventoryList = response;
-          });
+      $scope.onStockList = {};
+      $scope.dirPurchList = {};
+      $scope.productOrderList = {};
+      $scope.displayModalInfo = {};
+      $scope.statusActive = false;
+      $scope.tableHeadings1 = true;
+
+
+      /*----- Get list of On Stock -----*/
+      $scope.displayOnStockList = function displayOnStockList(){
+        CarServer.request("get", "/inventories/getInventoryStocks",
+        function(response){
+          console.log( response );
+          $scope.onStockList = response;
+        });
       }
+
+      /*----- View Individual Product on Tables -----*/
+      // $scope.viewProduct = function viewProduct( id ){
+      //   CarServer.request("get", "/inventories/getInventoryStocks",
+      //   function(response){
+      //     console.log( response );
+      //   });
+      // }
+      
+      /*----- Transfer Info to modal -----*/
+      $scope.displayProductInfo = function displayProductInfo( list , action ){
+        console.log( action );
+        $scope.tableHeadings = [];
+
+        if ( action == 'viewOnStock' ) {
+          $scope.tableHeadings1 = true;          
+          $scope.displayModalInfo = list;
+        }else if( action == 'edit' ) {
+          $scope.displayModalInfo = list;
+        }
+      }
+
+      /*----- Edit Individual Product on Tables -----*/
+      $scope.editProductInfo = function editProductInfo( ){
+        console.log($scope.displayModalInfo);
+        CarServer.request("post", "/inventories/"+$scope.displayModalInfo.id+"/updateInventoryStocks",
+          function(response){
+            console.log( response );
+            $('#productModalInfoEdit').modal('hide');
+        }, $scope.displayModalInfo); 
+      }
+      
+      /*----- Delete Individual Product on Tables -----*/
+      $scope.removeProduct = function removeProduct( list ){
+        if( confirm("Are you sure you want to delete this item?") ){
+          CarServer.request("get", "/inventories/"+list.id+"/deleteInventoryStock",
+            function(response){
+              console.log( response );
+              $scope.onStockList.splice( $scope.onStockList.indexOf(list) , 1 );
+          });
+        }
+      }
+
+
 
        // get total
       $scope.getTotal = function getTotal(){
@@ -35,7 +88,8 @@ app
         return total;
       }
 
-       $scope.getInventoryStocks;
+      /* Display all inventory table Lists */
+      $scope.displayOnStockList();
     }
   ])
   .controller('inventoryAddCtrl', [
@@ -47,6 +101,8 @@ app
     {
       console.log("inventoryAddCtrl");
       $scope.categoryList = {};
+      $scope.manufacturerList = {};
+      $scope.list = {};
       $scope.category = {};
       $scope.inventoryData = {};
       $scope.inventoryList = {};
@@ -55,6 +111,7 @@ app
       $scope.dataEdit = {};
       $scope.dataStored = {};
       $scope.showLoadState = false;
+      $scope.successLoadState = false;
       $scope.alertmsg = false;
       $scope.errormsg = false;
       $scope.msg = "";
@@ -68,7 +125,10 @@ app
       ];
       $scope.category.list = $scope.lists[0];
       var totalAmount = 0;
-      
+
+      /*----- Disable button -----*/
+      disabledButton();
+
       // Get list of services
       $scope.categories = function categories(){
         CarServer.request("get", "/categories",
@@ -79,8 +139,19 @@ app
         });
       }
 
+      /*----- Get list of Manufacturers -----*/
+      $scope.manufacturers = function manufacturers(){
+        CarServer.request("get", "/inventories/getManufacturerList",
+        function(response){
+          console.log( response );
+          $scope.manufacturerList = response;
+        });
+      }
+
       // Add On Stock to Basket 
        $scope.addToBasketStock = function addToBasketStock(){
+        
+
         console.log( 'Added to On Stock basket' );
         console.log($scope.inventoryData);
         var today = new Date();
@@ -97,13 +168,15 @@ app
           'cartID'            : randomID,
           'category_id'       : 1 ,  
           'transaction_date'  : today.toISOString().substring(0, 10) ,
-          'price'             : $scope.inventoryData.price ,
           'product_name'      : $scope.inventoryData.product_name ,
           'product_details'   : $scope.inventoryData.product_details ,
-          'product_type '     : $scope.inventoryData.product_type   ,
+          'product_type'      : $scope.inventoryData.product_type,
+          'price'             : $scope.inventoryData.price ,
           'quantity'          : $scope.inventoryData.quantity
         });
 
+        disabledButton();
+         console.log($scope.addOnStock.length);
         $scope.inventoryData.price = "";
         $scope.inventoryData.product_name = "";
         $scope.inventoryData.product_details = "";
@@ -117,6 +190,7 @@ app
 
       // Add Direct Purchase to Basket 
       $scope.addToBasketDirPurch = function addToBasketDirPurch(){
+        disabledButton();
         console.log( 'Added to On Stock basket' );
         console.log($scope.inventoryData);
         var today = new Date();
@@ -133,20 +207,16 @@ app
           'cartID'           : randomID,
           'category_id'      : 2,  
           'transaction_date' : today.toISOString().substring(0, 10) ,
-          'or_number'        : $scope.inventoryData.or_no ,
-          'incharge'         : $scope.inventoryData.in_charge ,
+          'or_no'            : $scope.inventoryData.or_no ,
+          'in_charge'        : $scope.inventoryData.in_charge ,
           'cash_on_hand'     : $scope.inventoryData.cash_on_hand ,
-          'store_name'           : $scope.inventoryData.store_name,
+          'store_name'       : $scope.inventoryData.store_name,
           'product_name'     : $scope.inventoryData.product_name , 
           'quantity'         : $scope.inventoryData.quantity , 
           'price '           : $scope.inventoryData.price,
           'details '         : $scope.inventoryData.details
         } );
 
-        $scope.inventoryData.or_no = "";
-        $scope.inventoryData.in_charge = "";
-        $scope.inventoryData.cash_on_hand = "";
-        $scope.inventoryData.store_name = "";
         $scope.inventoryData.product_name = "";
         $scope.inventoryData.product_details = "";
         $scope.inventoryData.price = "";
@@ -157,8 +227,10 @@ app
 
       // Add Product Order to Basket 
       $scope.addToBasketProdOrder = function addToBasketProdOrder(){
+        disabledButton();
         console.log( 'Added to Prodct Order basket' );
         console.log($scope.inventoryData);
+
         var today = new Date();
         var randomID = new Date().getTime() + '-' + Math.random().toString(36).slice(2);
         var totalQuantityPrice = parseFloat( $scope.inventoryData.price ) * parseFloat( $scope.inventoryData.quantity );
@@ -168,15 +240,14 @@ app
                      + '<span class="price pull-right">Php <span class="price-value">' + totalQuantityPrice + '</span></span>'
                      + '</li>';
         $( '#basket-ordered-lists' ).append( htmlList );  
-        
+
         $scope.addOnStock.push({ 
           'cartID'            : randomID,
           'category_id'       : 3,
           'transaction_date'  : today.toISOString().substring(0, 10) ,
-          'manufacturer'      : $scope.inventoryData.manufacturer ,
-          'address'           : $scope.inventoryData.address ,
+          'manufacturer_id'   : $scope.inventoryData.manufacturer_id ,
           'product_name'      : $scope.inventoryData.product_name ,
-          'quantity '         : $scope.inventoryData.quantity   ,
+          'quantity'          : $scope.inventoryData.quantity,
           'price'             : $scope.inventoryData.price ,
           'product_type'      : $scope.inventoryData.product_type ,
           'product_details'   : $scope.inventoryData.product_details
@@ -190,7 +261,6 @@ app
         
         getTotal( totalQuantityPrice , '+' );
       }
-
 
        // To Remove the Added Product
        $( 'body' ).delegate( '.btn-remove-stock-order' , 'click' , function(){
@@ -207,6 +277,7 @@ app
           });
           console.log($scope.addOnStock);
           $( '#' + ID ).parent().remove();
+          disabledButton();
        } );
 
        // Pass data to modal edit form
@@ -236,7 +307,7 @@ app
           });
        } 
 
-       function getTotal( orderValue , operation ) {
+      function getTotal( orderValue , operation ) {
         var total = 0;
         if ( operation == '+' ) {
           total = totalAmount + orderValue;
@@ -244,7 +315,15 @@ app
           total = totalAmount - orderValue;
         }
         totalAmount = total;
-        $( '#totalBasketPrice' ).text( total.toFixed(2) );
+        $( '#totalBasketPrice' ).text( total.toLocaleString() );
+      }
+
+      function disabledButton() {
+        if( $scope.addOnStock.length < 1 ) {
+          $( '#submitProductBasket' ).attr( 'disabled' , true );
+        }else {
+          $( '#submitProductBasket' ).removeAttr( 'disabled' );
+        }
       }
 
       // add inventory data
@@ -290,6 +369,7 @@ app
       // Insert All Selected Products
       $scope.storeSelectedData = function storeSelectedData() {
         $scope.createInventory();
+
         for( x in $scope.addOnStock ) {
           $scope.showLoadState = true;
           $scope.hideLoadState = true;
@@ -302,31 +382,28 @@ app
                   function( response ) {
                     console.log( 'success on-stock' )
                     $scope.showLoadState = false;
-                    $scope.hideLoadState = false;
-                    $scope.alertmsg = true;
-                    $scope.msg = "Successfully added on inventory.";
+                    $scope.hideLoadState = true;
+                    $scope.successLoadState = true;  
                     $timeout( function(){
-                      $scope.alertmsg = false;
+                      $scope.successLoadState = false;
+                      $scope.hideLoadState = false;
                     }, 3000 );
-                    $scope.alertmsg = false;
                 } , $scope.addOnStock[x] );
-                    // resetData();
                 break;
 
               case 2: // Insert Direct Purchase Products
                 CarServer.request( "post" , "/inventories/submitDirectPurchase" , 
                   function( response ) {
                     console.log( 'success direct-purchase' );
+                    console.log( $scope.addOnStock[x] );
                     $scope.showLoadState = false;
-                    $scope.hideLoadState = false;
-                    $scope.alertmsg = true;
-                    $scope.msg = "Successfully added on inventory.";
-                      $scope.alertmsg = false;
+                    $scope.hideLoadState = true;
+                    $scope.successLoadState = true;  
                     $timeout( function(){
+                      $scope.successLoadState = false;
+                      $scope.hideLoadState = false;
                     }, 3000 );
-                    $scope.alertmsg = false;
                 } , $scope.addOnStock[x] );
-                    resetData();
                 break;
 
               case 3: // Insert Product Orders
@@ -335,15 +412,13 @@ app
                   function( response ) {
                     console.log( 'success product-order' );
                     $scope.showLoadState = false;
-                    $scope.hideLoadState = false;
-                    $scope.alertmsg = true;
-                    $scope.msg = "Successfully added on inventory.";
+                    $scope.hideLoadState = true;
+                    $scope.successLoadState = true;  
                     $timeout( function(){
-                      $scope.alertmsg = false;
+                      $scope.successLoadState = false;
+                      $scope.hideLoadState = false;
                     }, 3000 );
-                    $scope.alertmsg = false;
                 } , $scope.addOnStock[x] );
-                    resetData();
                 break;
 
               default:
@@ -353,23 +428,18 @@ app
           }
         }
 
-        if ( $scope.addOnStock.length < 1 ) {
-            $scope.errormsg = true;
-            $scope.msg = "Empty/Invalid entry.";
-            $timeout( function() {
-              $scope.errormsg = false;
-            },3000 );
-        };
 
+        // if ( $scope.addOnStock.length < 1 ) {
+        //     $scope.errormsg = true;
+        //     $scope.msg = "Empty/Invalid entry.";
+        //     $timeout( function() {
+        //       $scope.errormsg = false;
+        //     },3000 );
+        // };
 
-
-
-
-
-          // $timeout( function() {
-          //   $scope.showLoadState = false;
-          //   $scope.hideLoadState = false;
-          // },3000 );
+        resetData();
+        disabledButton();
+        console.log($scope.addOnStock.length);
       }
 
       // get inventories
@@ -404,6 +474,7 @@ app
       $scope.getInventoryStocks();
       // $scope.getInventories();
       $scope.categories();
+      $scope.manufacturers();
     }
   ])
   .controller('expenseAddCtrl', [

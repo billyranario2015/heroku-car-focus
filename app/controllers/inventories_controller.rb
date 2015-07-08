@@ -65,7 +65,7 @@ class InventoriesController < ApplicationController
   def updateInventoryStocks
     on_stock = OnStock.find_by_id(params[:id])
 
-    if on_stock.update(product_name: params[:product_name], product_details: params[:product_details], category_id: params[:category_id], price: params[:price], quantity: params[:quantity], product_type: params[:product_type], created_at: params[:created_at], updated_at: params[:updated_at])
+    if on_stock.update(category_id: params[:category_id], inventory_id: params[:inventory_id], price: params[:price], product_details: params[:product_details], product_name: params[:product_name], product_type: params[:product_type], quantity: params[:quantity])
       logs = Log.create(user_id: current_user.id, action: "updated an item from Inventory(Stocks).")
       logs.save
       render :json => { :status => :ok, :message => "Success" }
@@ -134,7 +134,7 @@ class InventoriesController < ApplicationController
   def submitProductOrder
 
     inventory = Inventory.last
-    product = ProductOrder.create(category_id: params[:category_id], manufacturer_id: params[:manufacturer_id], product_type: params[:product_type], inventory_id: inventory.id, product_name: params[:product_name], quantity: params[:quantity], price: params[:quantity])
+    product = ProductOrder.create(category_id: params[:category_id], manufacturer_id: params[:manufacturer_id], product_name: params[:product_name], quantity: params[:quantity], price: params[:price], product_type: params[:product_type], product_details: params[:product_details], inventory_id: inventory.id)
   
     if product.save
       logs = Log.create(user_id: current_user.id, action: "added an item from Inventory(Product Order).")
